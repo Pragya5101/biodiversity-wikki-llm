@@ -15,5 +15,4 @@ threat_level: "High"
 **Threat Level:** High  
 
 ## Associated Species utilizing this Corridor
-- [[Camelus_dromedarius]] (Camel)
-- [[Scorpiones]] (Scorpion)
+No recorded species associated with this corridor in database.

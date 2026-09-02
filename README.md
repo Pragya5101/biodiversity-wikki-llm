@@ -12,7 +12,7 @@ Each species is a wiki record with a `curation_score` from 1–100 and a `priori
 | Tier 2 | 40–69 | Medium-priority curated records | All-data and Tier 2 + Tier 3 endpoints |
 | Tier 3 | 1–39 | Lowest-priority curated records | All three endpoints |
 
-Private curator notes are always assigned to Tier 3. The initial curation score is deterministically derived from the source conservation-risk score so the sample data has a reproducible assignment; edit `species.curation_score` and `species.priority_tier` to apply editorial judgement later.
+Private curator notes are always assigned to Tier 3. The curation score is deterministically derived from each species' real IUCN-style conservation status (Extinct/Extinct-in-the-wild/Critically-endangered → Tier 1; Endangered/Vulnerable/Near-threatened → Tier 2; Least-concern/Data-deficient/unassessed → Tier 3), so the sample data has a reproducible, meaningful assignment; edit `species.curation_score` and `species.priority_tier` to apply editorial judgement later.
 
 ## MCP endpoints
 
@@ -40,18 +40,20 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/biodiversity
 Then initialize/reset the database, ingest data, and recreate the Obsidian graph:
 
 ```powershell
-python ingest_kaggle_data.py --dataset-dir ./wildlife_dataset
+python ingest_animals_data.py --csv-path "C:\path\to\animals_info.csv"
 python export_to_obsidian.py
 ```
 
-If the Kaggle download is not available, omit `--dataset-dir` and the ingestion script generates a small dummy dataset. Open `obsidian_vault` in Obsidian and select Graph View.
+`ingest_animals_data.py` expects a species reference CSV shaped like the public "Animals" datasets found on Kaggle (columns: `Name, Kingdom, Phylum, ..., Class, ..., Weight, ..., Diet, ..., Population`, where `Population` is a stringified dict containing a `Population status` IUCN category). It filters out family/genus-level placeholder rows, then samples roughly 350 species: every Extinct-in-the-wild record, a capped sample of Extinct and Critically Endangered records, and a smaller breadth sample across the remaining statuses — pass `--seed` to change the sample deterministically. The CSV has no GPS/timestamp occurrence data, so Tier 1 "sightings" are lightly synthesized from each species' real continent of distribution; ecological interactions are inferred from each species' real `Diet` text, constrained to the same taxonomic class, continent, and a rough weight-based size check so links stay plausible.
+
+Open `obsidian_vault` in Obsidian and select Graph View. `export_to_obsidian.py` clears previously generated notes before writing, so it always reflects only what's currently in the database.
 
 ## Deploy on Render
 
 1. Push this repository, including `render.yaml`, to GitHub. Never commit `.env`.
 2. In Render select **New → Blueprint** and choose the repository.
 3. The Blueprint creates one PostgreSQL database and three web services. Render generates a distinct `MCP_API_KEY` for each one.
-4. Populate the Render database by running `python ingest_kaggle_data.py --dataset-dir ./wildlife_dataset` with `DATABASE_URL` set to the Render database’s external connection string. A newly created production database is empty until this step.
+4. Populate the Render database by running `python ingest_animals_data.py --csv-path "C:\path\to\animals_info.csv"` with `DATABASE_URL` set to the Render database’s external connection string. A newly created production database is empty until this step.
 5. Verify each `https://SERVICE.onrender.com/healthz` URL, then use `https://SERVICE.onrender.com/mcp` as that service’s MCP URL.
 
 The service rejects all MCP requests when its API key is absent or invalid. `/healthz` is intentionally public but returns no wiki data.
@@ -96,7 +98,7 @@ Add only the connectors appropriate for the person using Claude. Do not share th
 ## Verification
 
 ```powershell
-python -m py_compile server.py ingest_kaggle_data.py export_to_obsidian.py
+python -m py_compile server.py ingest_animals_data.py export_to_obsidian.py
 ```
 
 Test the required isolation after deployment:

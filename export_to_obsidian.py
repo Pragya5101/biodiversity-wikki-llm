@@ -46,6 +46,11 @@ def export_vault():
     print(f"Creating output directory: {OUTPUT_DIR}")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+    print("Clearing stale notes from a previous export...")
+    for filename in os.listdir(OUTPUT_DIR):
+        if filename.endswith(".md"):
+            os.remove(os.path.join(OUTPUT_DIR, filename))
+
     try:
         with conn.cursor() as cur:
             # 1. Fetch all species and their Tier 3 conservation intelligence

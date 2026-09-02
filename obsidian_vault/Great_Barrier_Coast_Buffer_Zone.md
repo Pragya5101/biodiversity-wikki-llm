@@ -15,13 +15,4 @@ threat_level: "High"
 **Threat Level:** High  
 
 ## Associated Species utilizing this Corridor
-- [[Crocodylinae]] (Crocodile)
-- [[Anas_platyrhynchos]] (Duck)
-- [[Anura]] (Frog)
-- [[Macropodidae]] (Kangaroo)
-- [[Cygnus_cygnus]] (Swan)
-- [[Anser_anser]] (Goose)
-- [[Hippopotamus_amphibius]] (Hippopotamus)
-- [[Phoca_vitulina]] (Harbor)
-- [[Lutrinae]] (Otter)
-- [[Phascolarctos_cinereus]] (Koala)
+No recorded species associated with this corridor in database.

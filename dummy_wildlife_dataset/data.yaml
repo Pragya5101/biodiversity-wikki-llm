@@ -1,5 +1,0 @@
-train: ./train/images
-val: ./valid/images
-
-nc: 54
-names: ['Zebra', 'Lion', 'Leopard', 'Cheetah', 'Tiger', 'Bear', 'Butterfly', 'Canary', 'Crocodile', 'Bull', 'Camel', 'Centipede', 'Caterpillar', 'Duck', 'Squirrel', 'Spider', 'Ladybug', 'Elephant', 'Horse', 'Fox', 'Tortoise', 'Frog', 'Kangaroo', 'Deer', 'Eagle', 'Monkey', 'Snake', 'Owl', 'Swan', 'Goat', 'Rabbit', 'Giraffe', 'Goose', 'PolarBear', 'Raven', 'Hippopotamus', 'BrownBear', 'Rhinoceros', 'Woodpecker', 'Sheep', 'Magpie', 'Ostrich', 'Jaguar', 'Hedgehog', 'Turkey', 'Raccoon', 'Worm', 'Harbor', 'Panda', 'RedPanda', 'Otter', 'Lynx', 'Scorpion', 'Koala']

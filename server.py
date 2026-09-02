@@ -232,11 +232,20 @@ def get_species_wiki(species_name: str, sightings_limit: int = 10) -> str:
         if intelligence:
             output += ["\n## Conservation", f"- IUCN: {intelligence['iucn_status']}", f"- Poaching risk: {intelligence['poaching_risk_score']}/10", f"- Breeding zone: {intelligence['protected_breeding_zone']}"]
         output.append("\n## Ecological links")
-        output.extend(f"- {row['interaction_type']}: {row['common_name']} (*{row['scientific_name']}*) — {row['interaction_details']}" for row in interactions) or output.append("- None in this endpoint scope.")
+        if interactions:
+            output.extend(f"- {row['interaction_type']}: {row['common_name']} (*{row['scientific_name']}*) — {row['interaction_details']}" for row in interactions)
+        else:
+            output.append("- None in this endpoint scope.")
         output.append("\n## Corridors")
-        output.extend(f"- {row['name']} ({row['corridor_type']}, {row['threat_level']} threat)" for row in corridors) or output.append("- None recorded.")
+        if corridors:
+            output.extend(f"- {row['name']} ({row['corridor_type']}, {row['threat_level']} threat)" for row in corridors)
+        else:
+            output.append("- None recorded.")
         output.append("\n## Recent sightings")
-        output.extend(f"- {row['sighting_time']:%Y-%m-%d %H:%M UTC}: {float(row['latitude']):.4f}, {float(row['longitude']):.4f}; image `{row['image_path'] or '-'}`" for row in sightings) or output.append("- None recorded.")
+        if sightings:
+            output.extend(f"- {row['sighting_time']:%Y-%m-%d %H:%M UTC}: {float(row['latitude']):.4f}, {float(row['longitude']):.4f}; image `{row['image_path'] or '-'}`" for row in sightings)
+        else:
+            output.append("- None recorded.")
         if private_notes:
             output.append("\n## Private curator notes (Tier 3)")
             output.extend(f"- {row['note']}" for row in private_notes)
