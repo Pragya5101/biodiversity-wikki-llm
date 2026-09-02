@@ -13,10 +13,7 @@ import psycopg2.extras
 from dotenv import load_dotenv
 from psycopg2.pool import SimpleConnectionPool
 
-try:
-    from mcp.server.fastmcp import FastMCP
-except ModuleNotFoundError:
-    from mcp.server.mcpserver import MCPServer as FastMCP
+from mcp.server.fastmcp import FastMCP
 
 
 load_dotenv()
