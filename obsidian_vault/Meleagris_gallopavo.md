@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Yukon Protected Buffer"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-16"
+last_assessment_date: "2026-05-13"
 ---
 
 # Turkey (*Meleagris gallopavo*)

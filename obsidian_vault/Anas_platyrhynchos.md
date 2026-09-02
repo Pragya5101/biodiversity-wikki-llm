@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Great Lakes Marsh Zone"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-07-09"
+last_assessment_date: "2026-06-25"
 ---
 
 # Duck (*Anas platyrhynchos*)
@@ -47,4 +47,4 @@ Active tracking program deployed in Great Lakes Marsh Zone. Strict anti-poaching
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-24 15:24 UTC | -11.8277, 131.5998 | `YOLO-CAM-550` | 35.7°C | 85.60% | [[dummy_wildlife_dataset\train\images\telemetry_cam_001.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.8700, 0.3172) dimensions 0.7597x0.7938 in source image frame. |
+| 2026-08-20 17:30 UTC | -12.9213, 131.4702 | `YOLO-CAM-506` | 26.4°C | 52.00% | [[dummy_wildlife_dataset\train\images\telemetry_cam_001.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.8700, 0.3172) dimensions 0.7597x0.7938 in source image frame. |

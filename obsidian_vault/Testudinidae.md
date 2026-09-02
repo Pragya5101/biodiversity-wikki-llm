@@ -11,7 +11,7 @@ poaching_risk_score: 5
 protected_breeding_zone: "Galapagos Shield Zone C"
 patrol_frequency_days: 9
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-19"
+last_assessment_date: "2026-07-09"
 ---
 
 # Tortoise (*Testudinidae*)

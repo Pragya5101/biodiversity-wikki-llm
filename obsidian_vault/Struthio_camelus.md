@@ -11,7 +11,7 @@ poaching_risk_score: 2
 protected_breeding_zone: "Serengeti Plains Zone B"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-08-04"
+last_assessment_date: "2026-08-21"
 ---
 
 # Ostrich (*Struthio camelus*)
@@ -34,6 +34,9 @@ Active tracking program deployed in Serengeti Plains Zone B. Strict anti-poachin
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
+- **Predation** relationship with [[Panthera_leo]] (Lion)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Savannah ecosystems where Lion limits Ostrich overgrazing.
 - **Predation** relationship with [[Panthera_pardus]] (Leopard)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Savannah ecosystems where Leopard limits Ostrich overgrazing.
@@ -47,4 +50,4 @@ Active tracking program deployed in Serengeti Plains Zone B. Strict anti-poachin
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-04 22:49 UTC | -2.3962, 35.0445 | `YOLO-CAM-150` | 22.2°C | 71.10% | [[dummy_wildlife_dataset\train\images\telemetry_cam_006.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2648, 0.3956) dimensions 0.1969x0.1232 in source image frame. |
+| 2026-08-19 00:14 UTC | -2.6621, 35.7951 | `YOLO-CAM-325` | 27.6°C | 29.00% | [[dummy_wildlife_dataset\train\images\telemetry_cam_006.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2648, 0.3956) dimensions 0.1969x0.1232 in source image frame. |

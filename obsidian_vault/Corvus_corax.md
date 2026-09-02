@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Yukon Mountain Crags"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-03-02"
+last_assessment_date: "2026-05-20"
 ---
 
 # Raven (*Corvus corax*)

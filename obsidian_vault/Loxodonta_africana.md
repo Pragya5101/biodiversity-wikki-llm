@@ -11,7 +11,7 @@ poaching_risk_score: 10
 protected_breeding_zone: "Tsavo East High Security Zone"
 patrol_frequency_days: 4
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-03-07"
+last_assessment_date: "2026-06-27"
 ---
 
 # Elephant (*Loxodonta africana*)

@@ -11,7 +11,7 @@ poaching_risk_score: 7
 protected_breeding_zone: "Himalayan Forest Sanctuary"
 patrol_frequency_days: 7
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-24"
+last_assessment_date: "2026-08-16"
 ---
 
 # RedPanda (*Ailurus fulgens*)

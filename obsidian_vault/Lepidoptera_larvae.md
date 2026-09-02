@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Forest Core"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-11"
+last_assessment_date: "2026-07-18"
 ---
 
 # Caterpillar (*Lepidoptera larvae*)
@@ -53,4 +53,4 @@ Active tracking program deployed in Eurasian Forest Core. Strict anti-poaching m
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-23 01:43 UTC | -2.1704, -63.4185 | `YOLO-CAM-912` | 31.3°C | 43.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_019.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.5379, 0.6495) dimensions 0.2827x0.3926 in source image frame. |
+| 2026-08-25 00:09 UTC | -4.6147, -60.5353 | `YOLO-CAM-218` | 19.4°C | 56.00% | [[dummy_wildlife_dataset\train\images\telemetry_cam_019.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.5379, 0.6495) dimensions 0.2827x0.3926 in source image frame. |

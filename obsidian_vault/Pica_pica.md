@@ -42,4 +42,4 @@ Active tracking program deployed in Eurasian Forest Core. Strict anti-poaching m
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-24 08:28 UTC | -2.9153, -60.2041 | `YOLO-CAM-572` | 16.1°C | 73.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_014.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9334, 0.0896) dimensions 0.9847x0.0155 in source image frame. |
+| 2026-08-19 23:44 UTC | -4.3181, -61.3491 | `YOLO-CAM-685` | 20.2°C | 38.10% | [[dummy_wildlife_dataset\train\images\telemetry_cam_014.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9334, 0.0896) dimensions 0.9847x0.0155 in source image frame. |

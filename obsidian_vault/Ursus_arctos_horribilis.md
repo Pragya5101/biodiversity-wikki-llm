@@ -11,7 +11,7 @@ poaching_risk_score: 3
 protected_breeding_zone: "Yukon Protected Buffer"
 patrol_frequency_days: 11
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-02-24"
+last_assessment_date: "2026-05-26"
 ---
 
 # BrownBear (*Ursus arctos horribilis*)
@@ -34,12 +34,9 @@ Active tracking program deployed in Yukon Protected Buffer. Strict anti-poaching
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Cercopithecidae]] (Monkey)
+- **Predation** relationship with [[Cervidae]] (Deer)
   - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where BrownBear limits Monkey overgrazing.
-- **Predation** relationship with [[Sciuridae]] (Squirrel)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where BrownBear limits Squirrel overgrazing.
+  - *Details:* Natural predation observed in Forest ecosystems where BrownBear limits Deer overgrazing.
 - **Predation** relationship with [[Ailuropoda_melanoleuca]] (Panda)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where BrownBear limits Panda overgrazing.

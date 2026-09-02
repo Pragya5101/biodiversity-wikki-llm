@@ -11,7 +11,7 @@ poaching_risk_score: 7
 protected_breeding_zone: "Serengeti Core Area A"
 patrol_frequency_days: 7
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-08-20"
+last_assessment_date: "2026-02-19"
 ---
 
 # Lion (*Panthera leo*)
@@ -34,15 +34,15 @@ Active tracking program deployed in Serengeti Core Area A. Strict anti-poaching 
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
+- **Predation** relationship with [[Struthio_camelus]] (Ostrich)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Savannah ecosystems where Lion limits Ostrich overgrazing.
 - **Predation** relationship with [[Testudinidae]] (Tortoise)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Savannah ecosystems where Lion limits Tortoise overgrazing.
 - **Predation** relationship with [[Equus_quagga]] (Zebra)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Savannah ecosystems where Lion limits Zebra overgrazing.
-- **Predation** relationship with [[Giraffa_camelopardalis]] (Giraffe)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Savannah ecosystems where Lion limits Giraffe overgrazing.
 
 ### Connected Corridors
 - [[Serengeti_Migration_Corridor]]
@@ -50,5 +50,5 @@ Active tracking program deployed in Serengeti Core Area A. Strict anti-poaching 
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-09-01 05:09 UTC | -2.4148, 34.3777 | `YOLO-CAM-188` | 37.1°C | 88.00% | [[dummy_wildlife_dataset\train\images\telemetry_cam_005.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.7656, 0.9088) dimensions 0.2131x0.0940 in source image frame. |
-| 2026-08-11 03:23 UTC | -2.7655, 35.2324 | `YOLO-CAM-394` | 30.5°C | 68.90% | [[dummy_wildlife_dataset\train\images\telemetry_cam_005.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9419, 0.4410) dimensions 0.6704x0.6764 in source image frame. |
+| 2026-09-01 13:39 UTC | -2.9248, 35.8291 | `YOLO-CAM-828` | 19.7°C | 59.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_005.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9419, 0.4410) dimensions 0.6704x0.6764 in source image frame. |
+| 2026-08-19 13:18 UTC | -2.6199, 35.9144 | `YOLO-CAM-470` | 32.9°C | 35.20% | [[dummy_wildlife_dataset\train\images\telemetry_cam_005.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.7656, 0.9088) dimensions 0.2131x0.0940 in source image frame. |

@@ -217,6 +217,26 @@ def main():
                 f"Active tracking program deployed in {meta['zone']}. Strict anti-poaching measures enforced. Periodic thermal surveillance."
             ))
 
+        # 3b. Insert Tier 3 private curator notes (only for Tier 3 species; Tier-3-only endpoint content)
+        print("Ingesting Tier 3 private curator notes...")
+        private_note_count = 0
+        for name, spec_id in species_map.items():
+            meta = SPECIES_METADATA.get(name)
+            if not meta:
+                continue
+            _, priority_tier = priority_for_species(meta)
+            if priority_tier != 3:
+                continue
+            cur.execute("""
+                INSERT INTO private_notes (species_id, note)
+                VALUES (%s, %s);
+            """, (
+                spec_id,
+                f"Internal curator note: {name} sightings around {meta['zone']} are logged from unverified community reports "
+                f"pending ranger confirmation. Do not cite in public-facing materials."
+            ))
+            private_note_count += 1
+
         # 4. Insert Corridors (Tier 2 Networks)
         print("Ingesting Corridors...")
         corridor_data = [
@@ -406,6 +426,7 @@ def main():
         print(f"Total Corridors inserted: {len(corridor_map)}")
         print(f"Total Ecological Interactions inserted: {len(interactions_to_insert)}")
         print(f"Total Telemetry Sightings (parsed from YOLO): {sighting_count}")
+        print(f"Total Tier 3 private notes inserted: {private_note_count}")
 
     except Exception as e:
         conn.rollback()

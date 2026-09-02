@@ -11,7 +11,7 @@ poaching_risk_score: 2
 protected_breeding_zone: "Yukon Protected Buffer"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-06"
+last_assessment_date: "2026-03-18"
 ---
 
 # Fox (*Vulpes vulpes*)
@@ -34,21 +34,24 @@ Active tracking program deployed in Yukon Protected Buffer. Strict anti-poaching
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Sciuridae]] (Squirrel)
+- **Predation** relationship with [[Cervidae]] (Deer)
   - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Fox limits Squirrel overgrazing.
+  - *Details:* Natural predation observed in Forest ecosystems where Fox limits Deer overgrazing.
+- **Predation** relationship with [[Ailuropoda_melanoleuca]] (Panda)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Forest ecosystems where Fox limits Panda overgrazing.
 - **Predation** relationship with [[Cercopithecidae]] (Monkey)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Fox limits Monkey overgrazing.
-- **Predation** relationship with [[Chilopoda]] (Centipede)
-  - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Fox preying on Centipede as a secondary food source.
-- **Predation** relationship with [[Araneae]] (Spider)
-  - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Fox preying on Spider as a secondary food source.
 - **Predation** relationship with [[Lepidoptera_larvae]] (Caterpillar)
   - *Energy Pathway:* Invertebrate to Small Carnivore
   - *Details:* Fox preying on Caterpillar as a secondary food source.
+- **Predation** relationship with [[Lepidoptera]] (Butterfly)
+  - *Energy Pathway:* Invertebrate to Small Carnivore
+  - *Details:* Fox preying on Butterfly as a secondary food source.
+- **Predation** relationship with [[Coccinellidae]] (Ladybug)
+  - *Energy Pathway:* Invertebrate to Small Carnivore
+  - *Details:* Fox preying on Ladybug as a secondary food source.
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]

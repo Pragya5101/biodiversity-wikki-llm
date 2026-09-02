@@ -11,7 +11,7 @@ poaching_risk_score: 4
 protected_breeding_zone: "Svalbard Ice Reserve Alpha"
 patrol_frequency_days: 10
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-07-05"
+last_assessment_date: "2026-07-15"
 ---
 
 # PolarBear (*Ursus maritimus*)

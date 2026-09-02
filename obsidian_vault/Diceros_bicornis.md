@@ -11,7 +11,7 @@ poaching_risk_score: 10
 protected_breeding_zone: "Ol Pejeta Rhino Sanctuary"
 patrol_frequency_days: 4
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-02-21"
+last_assessment_date: "2026-05-06"
 ---
 
 # Rhinoceros (*Diceros bicornis*)

@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Grazing Range"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-05"
+last_assessment_date: "2026-08-09"
 ---
 
 # Bull (*Bos taurus*)

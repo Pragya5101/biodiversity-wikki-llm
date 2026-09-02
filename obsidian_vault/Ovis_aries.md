@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Grazing Range"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-02-23"
+last_assessment_date: "2026-05-05"
 ---
 
 # Sheep (*Ovis aries*)
@@ -42,4 +42,4 @@ Active tracking program deployed in Eurasian Grazing Range. Strict anti-poaching
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-03 12:35 UTC | 49.1173, 16.7686 | `YOLO-CAM-890` | 24.3°C | 45.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_012.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.6331, 0.8594) dimensions 0.5559x0.6024 in source image frame. |
+| 2026-08-20 19:43 UTC | 45.9193, 14.1915 | `YOLO-CAM-887` | 30.8°C | 83.20% | [[dummy_wildlife_dataset\train\images\telemetry_cam_012.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.6331, 0.8594) dimensions 0.5559x0.6024 in source image frame. |

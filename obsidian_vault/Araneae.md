@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Amazon Canopy Reserve"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-06"
+last_assessment_date: "2026-02-25"
 ---
 
 # Spider (*Araneae*)
@@ -34,18 +34,12 @@ Active tracking program deployed in Amazon Canopy Reserve. Strict anti-poaching 
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Vulpes_vulpes]] (Fox)
+- **Predation** relationship with [[Accipitridae]] (Eagle)
   - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Fox preying on Spider as a secondary food source.
-- **Predation** relationship with [[Strigiformes]] (Owl)
-  - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Owl preying on Spider as a secondary food source.
+  - *Details:* Eagle preying on Spider as a secondary food source.
 - **Predation** relationship with [[Anura]] (Frog)
   - *Energy Pathway:* Invertebrate to Small Carnivore
   - *Details:* Frog preying on Spider as a secondary food source.
-- **Predation** relationship with [[Procyon_lotor]] (Raccoon)
-  - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Raccoon preying on Spider as a secondary food source.
 
 ### Connected Corridors
 - [[Amazon-Guiana_Ecological_Corridor]]
@@ -53,4 +47,4 @@ Active tracking program deployed in Amazon Canopy Reserve. Strict anti-poaching 
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-09-01 02:07 UTC | -2.0351, -63.7924 | `YOLO-CAM-192` | 24.5°C | 62.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_007.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.4359, 0.2805) dimensions 0.1582x0.4597 in source image frame. |
+| 2026-08-13 12:45 UTC | -3.9351, -61.3302 | `YOLO-CAM-614` | 36.5°C | 83.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_007.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.4359, 0.2805) dimensions 0.1582x0.4597 in source image frame. |

@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Great Lakes Marsh Zone"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-15"
+last_assessment_date: "2026-07-10"
 ---
 
 # Goose (*Anser anser*)

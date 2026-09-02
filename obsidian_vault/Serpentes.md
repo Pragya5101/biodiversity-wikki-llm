@@ -11,7 +11,7 @@ poaching_risk_score: 3
 protected_breeding_zone: "Amazon Floor Reserve"
 patrol_frequency_days: 11
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-04-03"
+last_assessment_date: "2026-05-01"
 ---
 
 # Snake (*Serpentes*)

@@ -11,7 +11,7 @@ poaching_risk_score: 6
 protected_breeding_zone: "Mara River Hippocamp Zone"
 patrol_frequency_days: 8
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-07-16"
+last_assessment_date: "2026-05-29"
 ---
 
 # Hippopotamus (*Hippopotamus amphibius*)

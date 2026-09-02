@@ -11,7 +11,7 @@ poaching_risk_score: 2
 protected_breeding_zone: "Rocky Mountain North Buffer"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-02-22"
+last_assessment_date: "2026-07-09"
 ---
 
 # Raccoon (*Procyon lotor*)
@@ -34,15 +34,15 @@ Active tracking program deployed in Rocky Mountain North Buffer. Strict anti-poa
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Coccinellidae]] (Ladybug)
+- **Predation** relationship with [[Lumbricina]] (Worm)
   - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Raccoon preying on Ladybug as a secondary food source.
-- **Predation** relationship with [[Araneae]] (Spider)
-  - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Raccoon preying on Spider as a secondary food source.
+  - *Details:* Raccoon preying on Worm as a secondary food source.
 - **Predation** relationship with [[Chilopoda]] (Centipede)
   - *Energy Pathway:* Invertebrate to Small Carnivore
   - *Details:* Raccoon preying on Centipede as a secondary food source.
+- **Predation** relationship with [[Coccinellidae]] (Ladybug)
+  - *Energy Pathway:* Invertebrate to Small Carnivore
+  - *Details:* Raccoon preying on Ladybug as a secondary food source.
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]

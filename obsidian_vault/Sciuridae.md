@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Forest Core"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-26"
+last_assessment_date: "2026-05-21"
 ---
 
 # Squirrel (*Sciuridae*)
@@ -34,21 +34,9 @@ Active tracking program deployed in Eurasian Forest Core. Strict anti-poaching m
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Panthera_tigris]] (Tiger)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Squirrel overgrazing.
 - **Predation** relationship with [[Ursus_arctos]] (Bear)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Bear limits Squirrel overgrazing.
-- **Predation** relationship with [[Ursus_arctos_horribilis]] (BrownBear)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where BrownBear limits Squirrel overgrazing.
-- **Predation** relationship with [[Vulpes_vulpes]] (Fox)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Fox limits Squirrel overgrazing.
-- **Predation** relationship with [[Strigiformes]] (Owl)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Owl limits Squirrel overgrazing.
 - **Predation** relationship with [[Panthera_onca]] (Jaguar)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Jaguar limits Squirrel overgrazing.
@@ -62,4 +50,4 @@ Active tracking program deployed in Eurasian Forest Core. Strict anti-poaching m
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-23 18:22 UTC | -4.5742, -62.4107 | `YOLO-CAM-755` | 30.5°C | 45.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_016.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.6727, 0.6338) dimensions 0.4082x0.5051 in source image frame. |
+| 2026-08-24 23:09 UTC | -3.9657, -61.7118 | `YOLO-CAM-955` | 36.8°C | 20.80% | [[dummy_wildlife_dataset\train\images\telemetry_cam_016.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.6727, 0.6338) dimensions 0.4082x0.5051 in source image frame. |

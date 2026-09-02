@@ -11,7 +11,7 @@ poaching_risk_score: 8
 protected_breeding_zone: "Pantanal Reserve Sector Delta"
 patrol_frequency_days: 6
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-08-13"
+last_assessment_date: "2026-03-16"
 ---
 
 # Jaguar (*Panthera onca*)
@@ -34,12 +34,12 @@ Active tracking program deployed in Pantanal Reserve Sector Delta. Strict anti-p
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
+- **Predation** relationship with [[Ailuropoda_melanoleuca]] (Panda)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Forest ecosystems where Jaguar limits Panda overgrazing.
 - **Predation** relationship with [[Sciuridae]] (Squirrel)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Jaguar limits Squirrel overgrazing.
-- **Predation** relationship with [[Cercopithecidae]] (Monkey)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Jaguar limits Monkey overgrazing.
 
 ### Connected Corridors
 - [[Amazon-Guiana_Ecological_Corridor]]
@@ -47,4 +47,4 @@ Active tracking program deployed in Pantanal Reserve Sector Delta. Strict anti-p
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-21 14:30 UTC | -3.9221, -61.1900 | `YOLO-CAM-711` | 30.5°C | 89.30% | [[dummy_wildlife_dataset\train\images\telemetry_cam_003.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9689, 0.7058) dimensions 0.3928x0.4733 in source image frame. |
+| 2026-08-13 19:45 UTC | -3.3342, -63.5287 | `YOLO-CAM-363` | 17.2°C | 83.50% | [[dummy_wildlife_dataset\train\images\telemetry_cam_003.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9689, 0.7058) dimensions 0.3928x0.4733 in source image frame. |

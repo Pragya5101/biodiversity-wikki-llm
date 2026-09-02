@@ -11,7 +11,7 @@ poaching_risk_score: 2
 protected_breeding_zone: "Blue Mountains Sanctuary"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-08-04"
+last_assessment_date: "2026-02-28"
 ---
 
 # Koala (*Phascolarctos cinereus*)
@@ -42,4 +42,4 @@ Active tracking program deployed in Blue Mountains Sanctuary. Strict anti-poachi
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-07 06:33 UTC | -32.4973, 150.8728 | `YOLO-CAM-865` | 24.7°C | 26.20% | [[dummy_wildlife_dataset\train\images\telemetry_cam_001.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.0441, 0.1275) dimensions 0.7591x0.2392 in source image frame. |
+| 2026-08-23 23:48 UTC | -32.0415, 148.6013 | `YOLO-CAM-185` | 34.8°C | 65.50% | [[dummy_wildlife_dataset\train\images\telemetry_cam_001.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.0441, 0.1275) dimensions 0.7591x0.2392 in source image frame. |

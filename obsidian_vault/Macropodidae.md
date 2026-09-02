@@ -11,7 +11,7 @@ poaching_risk_score: 2
 protected_breeding_zone: "New South Wales Plains"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-04"
+last_assessment_date: "2026-03-18"
 ---
 
 # Kangaroo (*Macropodidae*)
@@ -42,4 +42,4 @@ Active tracking program deployed in New South Wales Plains. Strict anti-poaching
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-31 20:51 UTC | -32.6489, 149.6091 | `YOLO-CAM-128` | 22.4°C | 57.20% | [[dummy_wildlife_dataset\train\images\telemetry_cam_018.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2236, 0.8132) dimensions 0.8113x0.1773 in source image frame. |
+| 2026-08-30 10:30 UTC | -33.1411, 150.6710 | `YOLO-CAM-243` | 24.2°C | 59.00% | [[dummy_wildlife_dataset\train\images\telemetry_cam_018.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2236, 0.8132) dimensions 0.8113x0.1773 in source image frame. |

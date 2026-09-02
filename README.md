@@ -66,17 +66,17 @@ Replace every placeholder with the exact Render service URL and that service’s
     "biodiversity-all": {
       "type": "sse",
       "url": "https://biodiversity-mcp-all.onrender.com/sse",
-      "headers": { "x-api-key": "MCP_1_KEY" }
+      "headers": { "x-api-key": "MCP1" }
     },
     "biodiversity-tier23": {
       "type": "sse",
       "url": "https://biodiversity-mcp-tier23.onrender.com/sse",
-      "headers": { "x-api-key": "MCP_2_KEY" }
+      "headers": { "x-api-key": "MCP2" }
     },
     "biodiversity-tier3": {
       "type": "sse",
       "url": "https://biodiversity-mcp-tier3.onrender.com/sse",
-      "headers": { "x-api-key": "MCP_3_KEY" }
+      "headers": { "x-api-key": "MCP3" }
     }
   }
 }

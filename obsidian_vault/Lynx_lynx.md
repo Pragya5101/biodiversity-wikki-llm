@@ -11,7 +11,7 @@ poaching_risk_score: 4
 protected_breeding_zone: "Yukon Protected Buffer"
 patrol_frequency_days: 10
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-07-04"
+last_assessment_date: "2026-07-01"
 ---
 
 # Lynx (*Lynx lynx*)
@@ -37,9 +37,9 @@ Active tracking program deployed in Yukon Protected Buffer. Strict anti-poaching
 - **Predation** relationship with [[Sciuridae]] (Squirrel)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Lynx limits Squirrel overgrazing.
-- **Predation** relationship with [[Cervidae]] (Deer)
+- **Predation** relationship with [[Ailuropoda_melanoleuca]] (Panda)
   - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Lynx limits Deer overgrazing.
+  - *Details:* Natural predation observed in Forest ecosystems where Lynx limits Panda overgrazing.
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]

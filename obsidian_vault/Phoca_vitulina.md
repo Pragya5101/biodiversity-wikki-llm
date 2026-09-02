@@ -11,7 +11,7 @@ poaching_risk_score: 3
 protected_breeding_zone: "Maine Coast Seal Harbor"
 patrol_frequency_days: 11
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-04-20"
+last_assessment_date: "2026-07-28"
 ---
 
 # Harbor (*Phoca vitulina*)

@@ -11,7 +11,7 @@ poaching_risk_score: 2
 protected_breeding_zone: "Sahara Transit Buffer"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-05"
+last_assessment_date: "2026-04-02"
 ---
 
 # Camel (*Camelus dromedarius*)
@@ -44,4 +44,4 @@ Active tracking program deployed in Sahara Transit Buffer. Strict anti-poaching 
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-20 05:02 UTC | 21.8942, 20.1671 | `YOLO-CAM-754` | 18.0°C | 61.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_020.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2798, 0.2204) dimensions 0.1765x0.7955 in source image frame. |
+| 2026-08-23 01:24 UTC | 21.0640, 20.1970 | `YOLO-CAM-986` | 15.3°C | 28.00% | [[dummy_wildlife_dataset\train\images\telemetry_cam_020.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2798, 0.2204) dimensions 0.1765x0.7955 in source image frame. |

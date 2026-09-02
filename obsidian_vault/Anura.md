@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Queensland Riparian Sanctuary"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-08-19"
+last_assessment_date: "2026-02-15"
 ---
 
 # Frog (*Anura*)
@@ -34,12 +34,12 @@ Active tracking program deployed in Queensland Riparian Sanctuary. Strict anti-p
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Chilopoda]] (Centipede)
-  - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Frog preying on Centipede as a secondary food source.
 - **Predation** relationship with [[Araneae]] (Spider)
   - *Energy Pathway:* Invertebrate to Small Carnivore
   - *Details:* Frog preying on Spider as a secondary food source.
+- **Predation** relationship with [[Chilopoda]] (Centipede)
+  - *Energy Pathway:* Invertebrate to Small Carnivore
+  - *Details:* Frog preying on Centipede as a secondary food source.
 - **Predation** relationship with [[Lepidoptera]] (Butterfly)
   - *Energy Pathway:* Invertebrate to Small Carnivore
   - *Details:* Frog preying on Butterfly as a secondary food source.

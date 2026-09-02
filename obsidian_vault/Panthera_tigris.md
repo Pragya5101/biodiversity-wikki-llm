@@ -11,7 +11,7 @@ poaching_risk_score: 10
 protected_breeding_zone: "Ranthambore Tiger Reserve A"
 patrol_frequency_days: 4
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-04-19"
+last_assessment_date: "2026-04-27"
 ---
 
 # Tiger (*Panthera tigris*)
@@ -34,12 +34,9 @@ Active tracking program deployed in Ranthambore Tiger Reserve A. Strict anti-poa
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Sciuridae]] (Squirrel)
+- **Predation** relationship with [[Cercopithecidae]] (Monkey)
   - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Squirrel overgrazing.
-- **Predation** relationship with [[Cervidae]] (Deer)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Deer overgrazing.
+  - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Monkey overgrazing.
 - **Predation** relationship with [[Ailuropoda_melanoleuca]] (Panda)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Panda overgrazing.

@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Wildflower Corridor"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-03-05"
+last_assessment_date: "2026-05-31"
 ---
 
 # Ladybug (*Coccinellidae*)
@@ -34,9 +34,9 @@ Active tracking program deployed in Eurasian Wildflower Corridor. Strict anti-po
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Accipitridae]] (Eagle)
+- **Predation** relationship with [[Vulpes_vulpes]] (Fox)
   - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Eagle preying on Ladybug as a secondary food source.
+  - *Details:* Fox preying on Ladybug as a secondary food source.
 - **Predation** relationship with [[Procyon_lotor]] (Raccoon)
   - *Energy Pathway:* Invertebrate to Small Carnivore
   - *Details:* Raccoon preying on Ladybug as a secondary food source.

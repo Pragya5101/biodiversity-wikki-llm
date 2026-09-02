@@ -11,7 +11,7 @@ poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Wildflower Corridor"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-03-12"
+last_assessment_date: "2026-08-12"
 ---
 
 # Butterfly (*Lepidoptera*)
@@ -34,6 +34,15 @@ Active tracking program deployed in Eurasian Wildflower Corridor. Strict anti-po
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
+- **Predation** relationship with [[Vulpes_vulpes]] (Fox)
+  - *Energy Pathway:* Invertebrate to Small Carnivore
+  - *Details:* Fox preying on Butterfly as a secondary food source.
+- **Predation** relationship with [[Strigiformes]] (Owl)
+  - *Energy Pathway:* Invertebrate to Small Carnivore
+  - *Details:* Owl preying on Butterfly as a secondary food source.
+- **Predation** relationship with [[Accipitridae]] (Eagle)
+  - *Energy Pathway:* Invertebrate to Small Carnivore
+  - *Details:* Eagle preying on Butterfly as a secondary food source.
 - **Predation** relationship with [[Anura]] (Frog)
   - *Energy Pathway:* Invertebrate to Small Carnivore
   - *Details:* Frog preying on Butterfly as a secondary food source.
@@ -47,4 +56,4 @@ Active tracking program deployed in Eurasian Wildflower Corridor. Strict anti-po
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-09-01 11:22 UTC | 46.1072, 10.1158 | `YOLO-CAM-598` | 36.3°C | 44.70% | [[dummy_wildlife_dataset\train\images\telemetry_cam_010.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.4564, 0.8736) dimensions 0.3696x0.4665 in source image frame. |
+| 2026-08-18 22:38 UTC | 49.4581, 15.6097 | `YOLO-CAM-502` | 22.8°C | 15.10% | [[dummy_wildlife_dataset\train\images\telemetry_cam_010.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.4564, 0.8736) dimensions 0.3696x0.4665 in source image frame. |

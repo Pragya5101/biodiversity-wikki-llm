@@ -11,7 +11,7 @@ poaching_risk_score: 3
 protected_breeding_zone: "Rocky Mountain North Buffer"
 patrol_frequency_days: 11
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-04-14"
+last_assessment_date: "2026-08-04"
 ---
 
 # Bear (*Ursus arctos*)
@@ -34,15 +34,15 @@ Active tracking program deployed in Rocky Mountain North Buffer. Strict anti-poa
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Cercopithecidae]] (Monkey)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Bear limits Monkey overgrazing.
 - **Predation** relationship with [[Sciuridae]] (Squirrel)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Bear limits Squirrel overgrazing.
 - **Predation** relationship with [[Cervidae]] (Deer)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Bear limits Deer overgrazing.
+- **Predation** relationship with [[Cercopithecidae]] (Monkey)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Forest ecosystems where Bear limits Monkey overgrazing.
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]

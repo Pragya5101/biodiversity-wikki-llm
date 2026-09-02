@@ -11,7 +11,7 @@ poaching_risk_score: 6
 protected_breeding_zone: "Kakadu Wetlands Area B"
 patrol_frequency_days: 8
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-07-14"
+last_assessment_date: "2026-05-09"
 ---
 
 # Crocodile (*Crocodylinae*)

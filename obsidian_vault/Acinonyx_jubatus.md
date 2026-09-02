@@ -11,7 +11,7 @@ poaching_risk_score: 5
 protected_breeding_zone: "Lolkisale Protected Range"
 patrol_frequency_days: 9
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-07-08"
+last_assessment_date: "2026-05-30"
 ---
 
 # Cheetah (*Acinonyx jubatus*)
@@ -34,12 +34,15 @@ Active tracking program deployed in Lolkisale Protected Range. Strict anti-poach
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Giraffa_camelopardalis]] (Giraffe)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Savannah ecosystems where Cheetah limits Giraffe overgrazing.
 - **Predation** relationship with [[Struthio_camelus]] (Ostrich)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Savannah ecosystems where Cheetah limits Ostrich overgrazing.
+- **Predation** relationship with [[Giraffa_camelopardalis]] (Giraffe)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Savannah ecosystems where Cheetah limits Giraffe overgrazing.
+- **Predation** relationship with [[Equus_quagga]] (Zebra)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Savannah ecosystems where Cheetah limits Zebra overgrazing.
 
 ### Connected Corridors
 - [[Serengeti_Migration_Corridor]]

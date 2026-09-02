@@ -11,7 +11,7 @@ poaching_risk_score: 2
 protected_breeding_zone: "Great Lakes Marsh Zone"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-18"
+last_assessment_date: "2026-05-06"
 ---
 
 # Swan (*Cygnus cygnus*)
@@ -42,4 +42,4 @@ Active tracking program deployed in Great Lakes Marsh Zone. Strict anti-poaching
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-03 10:13 UTC | -12.7411, 132.0575 | `YOLO-CAM-866` | 28.6°C | 52.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_006.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2113, 0.1336) dimensions 0.7715x0.4093 in source image frame. |
+| 2026-08-23 21:02 UTC | -11.1005, 132.1892 | `YOLO-CAM-452` | 27.3°C | 70.40% | [[dummy_wildlife_dataset\train\images\telemetry_cam_006.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2113, 0.1336) dimensions 0.7715x0.4093 in source image frame. |

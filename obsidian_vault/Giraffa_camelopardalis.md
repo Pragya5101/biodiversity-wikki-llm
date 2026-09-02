@@ -11,7 +11,7 @@ poaching_risk_score: 5
 protected_breeding_zone: "Serengeti Plains Zone B"
 patrol_frequency_days: 9
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-08-21"
+last_assessment_date: "2026-03-18"
 ---
 
 # Giraffe (*Giraffa camelopardalis*)
@@ -34,9 +34,9 @@ Active tracking program deployed in Serengeti Plains Zone B. Strict anti-poachin
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Panthera_leo]] (Lion)
+- **Predation** relationship with [[Panthera_pardus]] (Leopard)
   - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Savannah ecosystems where Lion limits Giraffe overgrazing.
+  - *Details:* Natural predation observed in Savannah ecosystems where Leopard limits Giraffe overgrazing.
 - **Predation** relationship with [[Acinonyx_jubatus]] (Cheetah)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Savannah ecosystems where Cheetah limits Giraffe overgrazing.
