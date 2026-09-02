@@ -176,6 +176,45 @@ def list_at_risk_species(limit: int = 20) -> str:
 
 
 @mcp.tool()
+def list_extinct_species(limit: int = 20) -> str:
+    """List species in this endpoint's scope that are already extinct (IUCN status Extinct or
+    Extinct in the Wild). Use this for open-ended questions like "give me the names of extinct
+    animals" or "which species have gone extinct" -- as opposed to list_at_risk_species, which
+    covers species that are still alive but threatened."""
+    if not isinstance(limit, int) or isinstance(limit, bool) or not 1 <= limit <= 50:
+        return "Invalid limit: provide a whole number from 1 to 50."
+    try:
+        scope_sql, scope_params = scope_clause("s.priority_tier")
+        with get_db_cursor() as cursor:
+            cursor.execute(
+                f"""
+                SELECT s.common_name, s.scientific_name, s.priority_tier, ci.iucn_status
+                FROM species s
+                JOIN conservation_intelligence ci ON ci.species_id = s.id
+                WHERE {scope_sql} AND ci.iucn_status ~* '\\(EX\\)|\\(EW\\)'
+                ORDER BY s.common_name
+                LIMIT %s
+                """,
+                (*scope_params, limit),
+            )
+            rows = cursor.fetchall()
+        if not rows:
+            return "No extinct species are available through this endpoint."
+        output = [
+            f"### Extinct species ({MCP_SCOPE})",
+            "| Species | IUCN status | Priority tier |",
+            "| --- | --- | --- |",
+        ]
+        output.extend(
+            f"| {row['common_name']} (*{row['scientific_name']}*) | {row['iucn_status']} | {row['priority_tier']} |"
+            for row in rows
+        )
+        return "\n".join(output)
+    except Exception as error:
+        return f"Database error: {error}"
+
+
+@mcp.tool()
 def get_species_wiki(species_name: str, sightings_limit: int = 10) -> str:
     """Return the complete wiki profile for one species, if its priority tier is in this endpoint's scope."""
     if not isinstance(sightings_limit, int) or isinstance(sightings_limit, bool) or not 1 <= sightings_limit <= 100:
