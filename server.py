@@ -213,9 +213,10 @@ async def healthcheck(request):
 
 try:
     from mcp.server.transport_security import TransportSecuritySettings
-    app = mcp.sse_app(transport_security=TransportSecuritySettings(enable_dns_rebinding_protection=False))
-except (ImportError, TypeError):
-    app = mcp.sse_app()
+    mcp.settings.transport_security = TransportSecuritySettings(enable_dns_rebinding_protection=False)
+except ImportError:
+    pass
+app = mcp.streamable_http_app()
 
 from starlette.routing import Route
 app.routes.append(Route("/healthz", healthcheck))

@@ -52,30 +52,39 @@ If the Kaggle download is not available, omit `--dataset-dir` and the ingestion 
 2. In Render select **New → Blueprint** and choose the repository.
 3. The Blueprint creates one PostgreSQL database and three web services. Render generates a distinct `MCP_API_KEY` for each one.
 4. Populate the Render database by running `python ingest_kaggle_data.py --dataset-dir ./wildlife_dataset` with `DATABASE_URL` set to the Render database’s external connection string. A newly created production database is empty until this step.
-5. Verify each `https://SERVICE.onrender.com/healthz` URL, then use `https://SERVICE.onrender.com/sse` as that service’s MCP URL.
+5. Verify each `https://SERVICE.onrender.com/healthz` URL, then use `https://SERVICE.onrender.com/mcp` as that service’s MCP URL.
 
 The service rejects all MCP requests when its API key is absent or invalid. `/healthz` is intentionally public but returns no wiki data.
 
+The server uses the Streamable HTTP transport, mounted at `/mcp` (not `/sse`). This matters for auth: every request goes to that one fixed URL directly, with no server-generated redirect in between, so a query-string API key stays attached to every call — a header-only, session-redirecting transport would silently drop it after the first request.
+
 ## Claude connector configuration
 
-Replace every placeholder with the exact Render service URL and that service’s own generated `MCP_API_KEY`.
+**If your Claude client's "Add connector" UI only asks for a Name and a URL** (no custom headers field — this is the case for the Connectors screen in the Claude app's Settings), pass the API key as a query parameter directly in the URL:
+
+| Name | Remote MCP server URL |
+| --- | --- |
+| biodiversity-all | `https://biodiversity-mcp-all.onrender.com/mcp?api_key=MCP1` |
+| biodiversity-tier23 | `https://biodiversity-mcp-tier23.onrender.com/mcp?api_key=MCP2` |
+| biodiversity-tier3 | `https://biodiversity-mcp-tier3.onrender.com/mcp?api_key=MCP3` |
+
+Replace `MCP1`/`MCP2`/`MCP3` with each service's own generated `MCP_API_KEY` value from its Render Environment tab.
+
+**If your Claude client instead reads a local `mcpServers` config file** (classic Claude Desktop's `claude_desktop_config.json`), you can use the header form instead:
 
 ```json
 {
   "mcpServers": {
     "biodiversity-all": {
-      "type": "sse",
-      "url": "https://biodiversity-mcp-all.onrender.com/sse",
+      "url": "https://biodiversity-mcp-all.onrender.com/mcp",
       "headers": { "x-api-key": "MCP1" }
     },
     "biodiversity-tier23": {
-      "type": "sse",
-      "url": "https://biodiversity-mcp-tier23.onrender.com/sse",
+      "url": "https://biodiversity-mcp-tier23.onrender.com/mcp",
       "headers": { "x-api-key": "MCP2" }
     },
     "biodiversity-tier3": {
-      "type": "sse",
-      "url": "https://biodiversity-mcp-tier3.onrender.com/sse",
+      "url": "https://biodiversity-mcp-tier3.onrender.com/mcp",
       "headers": { "x-api-key": "MCP3" }
     }
   }
