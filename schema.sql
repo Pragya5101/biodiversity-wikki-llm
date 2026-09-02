@@ -8,12 +8,28 @@ CREATE TABLE IF NOT EXISTS species (
     common_name VARCHAR(100) NOT NULL,
     taxonomic_class VARCHAR(50) NOT NULL,
     primary_habitat VARCHAR(100) NOT NULL,
+    curation_score INTEGER NOT NULL DEFAULT 50 CHECK (curation_score BETWEEN 1 AND 100),
+    priority_tier SMALLINT NOT NULL DEFAULT 2 CHECK (priority_tier BETWEEN 1 AND 3),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Upgrade databases created by earlier versions of this project.
+ALTER TABLE species ADD COLUMN IF NOT EXISTS curation_score INTEGER;
+ALTER TABLE species ADD COLUMN IF NOT EXISTS priority_tier SMALLINT;
+UPDATE species
+SET curation_score = COALESCE(curation_score, 50),
+    priority_tier = COALESCE(priority_tier, 2);
+ALTER TABLE species ALTER COLUMN curation_score SET NOT NULL;
+ALTER TABLE species ALTER COLUMN priority_tier SET NOT NULL;
+ALTER TABLE species DROP CONSTRAINT IF EXISTS check_species_curation_score;
+ALTER TABLE species ADD CONSTRAINT check_species_curation_score CHECK (curation_score BETWEEN 1 AND 100);
+ALTER TABLE species DROP CONSTRAINT IF EXISTS check_species_priority_tier;
+ALTER TABLE species ADD CONSTRAINT check_species_priority_tier CHECK (priority_tier BETWEEN 1 AND 3);
 
 -- Indexing for fast search on names
 CREATE INDEX IF NOT EXISTS idx_species_scientific_name ON species(scientific_name);
 CREATE INDEX IF NOT EXISTS idx_species_common_name ON species(common_name);
+CREATE INDEX IF NOT EXISTS idx_species_priority_tier ON species(priority_tier);
 
 -- Tier 1: Raw Observation & Telemetry Data
 -- Sightings, GPS coordinates, timestamps, sensors, and environmental readings
@@ -80,3 +96,15 @@ CREATE TABLE IF NOT EXISTS conservation_intelligence (
     last_assessment_date DATE NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Private curator annotations are always Tier 3 records. They are intentionally
+-- separate from public conservation data so only a Tier-3-scoped endpoint can
+-- return them when querying a Tier-3 record.
+CREATE TABLE IF NOT EXISTS private_notes (
+    id SERIAL PRIMARY KEY,
+    species_id INTEGER NOT NULL REFERENCES species(id) ON DELETE CASCADE,
+    note TEXT NOT NULL,
+    priority_tier SMALLINT NOT NULL DEFAULT 3 CHECK (priority_tier = 3),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_private_notes_species_id ON private_notes(species_id);

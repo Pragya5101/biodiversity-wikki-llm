@@ -4,18 +4,23 @@ scientific_name: "Lumbricina"
 common_name: "Worm"
 taxonomic_class: "Clitellata"
 primary_habitat: "Forest"
+curation_score: 10
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Forest Core"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-07-16"
+last_assessment_date: "2026-03-01"
 ---
 
 # Worm (*Lumbricina*)
 
 **Taxonomic Class:** Clitellata  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 10/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)
@@ -29,15 +34,9 @@ Active tracking program deployed in Eurasian Forest Core. Strict anti-poaching m
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Vulpes_vulpes]] (Fox)
+- **Predation** relationship with [[Accipitridae]] (Eagle)
   - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Fox preying on Worm as a secondary food source.
-- **Predation** relationship with [[Strigiformes]] (Owl)
-  - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Owl preying on Worm as a secondary food source.
-- **Predation** relationship with [[Procyon_lotor]] (Raccoon)
-  - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Raccoon preying on Worm as a secondary food source.
+  - *Details:* Eagle preying on Worm as a secondary food source.
 
 ### Connected Corridors
 - [[Eurasian_Forest_Migration_Network]]

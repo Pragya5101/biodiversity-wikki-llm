@@ -4,18 +4,23 @@ scientific_name: "Panthera tigris"
 common_name: "Tiger"
 taxonomic_class: "Mammalia"
 primary_habitat: "Forest"
+curation_score: 100
+priority_tier: 1
 iucn_status: "Endangered (EN)"
 poaching_risk_score: 10
 protected_breeding_zone: "Ranthambore Tiger Reserve A"
 patrol_frequency_days: 4
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-11"
+last_assessment_date: "2026-04-19"
 ---
 
 # Tiger (*Panthera tigris*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 100/100
+**Priority Tier:** 1
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Endangered (EN)
@@ -29,15 +34,15 @@ Active tracking program deployed in Ranthambore Tiger Reserve A. Strict anti-poa
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Cercopithecidae]] (Monkey)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Monkey overgrazing.
 - **Predation** relationship with [[Sciuridae]] (Squirrel)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Squirrel overgrazing.
 - **Predation** relationship with [[Cervidae]] (Deer)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Deer overgrazing.
+- **Predation** relationship with [[Ailuropoda_melanoleuca]] (Panda)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Forest ecosystems where Tiger limits Panda overgrazing.
 
 ### Connected Corridors
 - [[Amazon-Guiana_Ecological_Corridor]]

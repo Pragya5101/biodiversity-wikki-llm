@@ -4,18 +4,23 @@ scientific_name: "Testudinidae"
 common_name: "Tortoise"
 taxonomic_class: "Reptilia"
 primary_habitat: "Savannah"
+curation_score: 50
+priority_tier: 2
 iucn_status: "Vulnerable (VU)"
 poaching_risk_score: 5
 protected_breeding_zone: "Galapagos Shield Zone C"
 patrol_frequency_days: 9
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-04-24"
+last_assessment_date: "2026-05-19"
 ---
 
 # Tortoise (*Testudinidae*)
 
 **Taxonomic Class:** Reptilia  
 **Primary Habitat:** Savannah  
+
+**Curation Score:** 50/100
+**Priority Tier:** 2
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Vulnerable (VU)
@@ -32,12 +37,6 @@ Active tracking program deployed in Galapagos Shield Zone C. Strict anti-poachin
 - **Predation** relationship with [[Panthera_leo]] (Lion)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Savannah ecosystems where Lion limits Tortoise overgrazing.
-- **Predation** relationship with [[Panthera_pardus]] (Leopard)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Savannah ecosystems where Leopard limits Tortoise overgrazing.
-- **Predation** relationship with [[Acinonyx_jubatus]] (Cheetah)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Savannah ecosystems where Cheetah limits Tortoise overgrazing.
 
 ### Connected Corridors
 - [[Serengeti_Migration_Corridor]]

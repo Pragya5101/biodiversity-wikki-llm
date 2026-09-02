@@ -113,6 +113,17 @@ def generate_gps(habitat: str):
     lon = random.uniform(geo["lon_range"][0], geo["lon_range"][1])
     return lat, lon
 
+
+def priority_for_species(meta: dict) -> tuple[int, int]:
+    """Map the source conservation score to the wiki's documented curation tiers.
+
+    Tier 1 is the highest-priority partition (70-100), Tier 2 is medium
+    priority (40-69), and Tier 3 is the lowest-priority partition (1-39).
+    """
+    curation_score = int(meta.get("poach", 1)) * 10
+    priority_tier = 1 if curation_score >= 70 else 2 if curation_score >= 40 else 3
+    return curation_score, priority_tier
+
 def create_dummy_dataset(base_dir: str):
     """Creates a dummy YOLO dataset with 20 label files and fake images for testing ingestion."""
     print("Kaggle dataset directory not found. Creating a dummy dataset to test ingestion...")
@@ -172,7 +183,7 @@ def main():
 
         # 1. TRUNCATE tables to reset
         print("Clearing existing tables...")
-        cur.execute("TRUNCATE TABLE conservation_intelligence, species_corridors, corridors, ecological_interactions, sightings, species RESTART IDENTITY CASCADE;")
+        cur.execute("TRUNCATE TABLE conservation_intelligence, private_notes, species_corridors, corridors, ecological_interactions, sightings, species RESTART IDENTITY CASCADE;")
 
         # 2. Insert Species master entries
         print("Ingesting 54 Species classes...")
@@ -180,10 +191,11 @@ def main():
         
         for name in SPECIES_CLASSES:
             meta = SPECIES_METADATA.get(name, {"sci": f"Unknown {name}", "class": "Mammalia", "habitat": "Forest"})
+            curation_score, priority_tier = priority_for_species(meta)
             cur.execute("""
-                INSERT INTO species (scientific_name, common_name, taxonomic_class, primary_habitat)
-                VALUES (%s, %s, %s, %s) RETURNING id;
-            """, (meta["sci"], name, meta["class"], meta["habitat"]))
+                INSERT INTO species (scientific_name, common_name, taxonomic_class, primary_habitat, curation_score, priority_tier)
+                VALUES (%s, %s, %s, %s, %s, %s) RETURNING id;
+            """, (meta["sci"], name, meta["class"], meta["habitat"], curation_score, priority_tier))
             species_map[name] = cur.fetchone()[0]
 
         # 3. Insert Tier 3 Conservation Intelligence

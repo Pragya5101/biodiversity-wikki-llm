@@ -4,18 +4,23 @@ scientific_name: "Anas platyrhynchos"
 common_name: "Duck"
 taxonomic_class: "Aves"
 primary_habitat: "Wetlands"
+curation_score: 10
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 1
 protected_breeding_zone: "Great Lakes Marsh Zone"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-11"
+last_assessment_date: "2026-07-09"
 ---
 
 # Duck (*Anas platyrhynchos*)
 
 **Taxonomic Class:** Aves  
 **Primary Habitat:** Wetlands  
+
+**Curation Score:** 10/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)
@@ -42,4 +47,4 @@ Active tracking program deployed in Great Lakes Marsh Zone. Strict anti-poaching
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-22 11:44 UTC | -11.8215, 132.8800 | `YOLO-CAM-989` | 20.7°C | 80.80% | [[dummy_wildlife_dataset\train\images\telemetry_cam_001.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.8700, 0.3172) dimensions 0.7597x0.7938 in source image frame. |
+| 2026-08-24 15:24 UTC | -11.8277, 131.5998 | `YOLO-CAM-550` | 35.7°C | 85.60% | [[dummy_wildlife_dataset\train\images\telemetry_cam_001.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.8700, 0.3172) dimensions 0.7597x0.7938 in source image frame. |

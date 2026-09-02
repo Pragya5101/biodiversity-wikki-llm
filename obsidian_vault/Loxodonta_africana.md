@@ -4,18 +4,23 @@ scientific_name: "Loxodonta africana"
 common_name: "Elephant"
 taxonomic_class: "Mammalia"
 primary_habitat: "Savannah"
+curation_score: 100
+priority_tier: 1
 iucn_status: "Endangered (EN)"
 poaching_risk_score: 10
 protected_breeding_zone: "Tsavo East High Security Zone"
 patrol_frequency_days: 4
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-03-01"
+last_assessment_date: "2026-03-07"
 ---
 
 # Elephant (*Loxodonta africana*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Savannah  
+
+**Curation Score:** 100/100
+**Priority Tier:** 1
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Endangered (EN)

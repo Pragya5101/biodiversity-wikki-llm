@@ -4,18 +4,23 @@ scientific_name: "Lynx lynx"
 common_name: "Lynx"
 taxonomic_class: "Mammalia"
 primary_habitat: "Forest"
+curation_score: 40
+priority_tier: 2
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 4
 protected_breeding_zone: "Yukon Protected Buffer"
 patrol_frequency_days: 10
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-02-22"
+last_assessment_date: "2026-07-04"
 ---
 
 # Lynx (*Lynx lynx*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 40/100
+**Priority Tier:** 2
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)
@@ -29,12 +34,9 @@ Active tracking program deployed in Yukon Protected Buffer. Strict anti-poaching
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Cercopithecidae]] (Monkey)
+- **Predation** relationship with [[Sciuridae]] (Squirrel)
   - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Lynx limits Monkey overgrazing.
-- **Predation** relationship with [[Ailuropoda_melanoleuca]] (Panda)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Lynx limits Panda overgrazing.
+  - *Details:* Natural predation observed in Forest ecosystems where Lynx limits Squirrel overgrazing.
 - **Predation** relationship with [[Cervidae]] (Deer)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Lynx limits Deer overgrazing.

@@ -4,18 +4,23 @@ scientific_name: "Lutrinae"
 common_name: "Otter"
 taxonomic_class: "Mammalia"
 primary_habitat: "Wetlands"
+curation_score: 30
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 3
 protected_breeding_zone: "Queensland Riparian Sanctuary"
 patrol_frequency_days: 11
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-07-31"
+last_assessment_date: "2026-08-21"
 ---
 
 # Otter (*Lutrinae*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Wetlands  
+
+**Curation Score:** 30/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)
@@ -29,12 +34,12 @@ Active tracking program deployed in Queensland Riparian Sanctuary. Strict anti-p
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Anser_anser]] (Goose)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Wetlands ecosystems where Otter limits Goose overgrazing.
 - **Predation** relationship with [[Anas_platyrhynchos]] (Duck)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Wetlands ecosystems where Otter limits Duck overgrazing.
+- **Predation** relationship with [[Anser_anser]] (Goose)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Wetlands ecosystems where Otter limits Goose overgrazing.
 
 ### Connected Corridors
 - [[Great_Barrier_Coast_Buffer_Zone]]
@@ -42,4 +47,4 @@ Active tracking program deployed in Queensland Riparian Sanctuary. Strict anti-p
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-24 00:15 UTC | -12.5268, 132.0328 | `YOLO-CAM-632` | 19.1°C | 37.90% | [[dummy_wildlife_dataset\train\images\telemetry_cam_013.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.7522, 0.4933) dimensions 0.0205x0.2429 in source image frame. |
+| 2026-08-13 13:05 UTC | -11.0689, 131.4044 | `YOLO-CAM-238` | 23.9°C | 90.50% | [[dummy_wildlife_dataset\train\images\telemetry_cam_013.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.7522, 0.4933) dimensions 0.0205x0.2429 in source image frame. |

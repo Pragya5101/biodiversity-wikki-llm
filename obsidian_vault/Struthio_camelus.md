@@ -4,18 +4,23 @@ scientific_name: "Struthio camelus"
 common_name: "Ostrich"
 taxonomic_class: "Mammalia"
 primary_habitat: "Savannah"
+curation_score: 20
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 2
 protected_breeding_zone: "Serengeti Plains Zone B"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-17"
+last_assessment_date: "2026-08-04"
 ---
 
 # Ostrich (*Struthio camelus*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Savannah  
+
+**Curation Score:** 20/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)
@@ -29,6 +34,9 @@ Active tracking program deployed in Serengeti Plains Zone B. Strict anti-poachin
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
+- **Predation** relationship with [[Panthera_pardus]] (Leopard)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Savannah ecosystems where Leopard limits Ostrich overgrazing.
 - **Predation** relationship with [[Acinonyx_jubatus]] (Cheetah)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Savannah ecosystems where Cheetah limits Ostrich overgrazing.
@@ -39,4 +47,4 @@ Active tracking program deployed in Serengeti Plains Zone B. Strict anti-poachin
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-14 20:04 UTC | -1.5437, 34.6975 | `YOLO-CAM-413` | 15.2°C | 88.00% | [[dummy_wildlife_dataset\train\images\telemetry_cam_006.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2648, 0.3956) dimensions 0.1969x0.1232 in source image frame. |
+| 2026-08-04 22:49 UTC | -2.3962, 35.0445 | `YOLO-CAM-150` | 22.2°C | 71.10% | [[dummy_wildlife_dataset\train\images\telemetry_cam_006.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.2648, 0.3956) dimensions 0.1969x0.1232 in source image frame. |

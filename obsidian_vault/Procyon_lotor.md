@@ -4,18 +4,23 @@ scientific_name: "Procyon lotor"
 common_name: "Raccoon"
 taxonomic_class: "Mammalia"
 primary_habitat: "Forest"
+curation_score: 20
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 2
 protected_breeding_zone: "Rocky Mountain North Buffer"
 patrol_frequency_days: 12
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-10"
+last_assessment_date: "2026-02-22"
 ---
 
 # Raccoon (*Procyon lotor*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 20/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)
@@ -32,12 +37,12 @@ Active tracking program deployed in Rocky Mountain North Buffer. Strict anti-poa
 - **Predation** relationship with [[Coccinellidae]] (Ladybug)
   - *Energy Pathway:* Invertebrate to Small Carnivore
   - *Details:* Raccoon preying on Ladybug as a secondary food source.
-- **Predation** relationship with [[Lumbricina]] (Worm)
+- **Predation** relationship with [[Araneae]] (Spider)
   - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Raccoon preying on Worm as a secondary food source.
-- **Predation** relationship with [[Lepidoptera_larvae]] (Caterpillar)
+  - *Details:* Raccoon preying on Spider as a secondary food source.
+- **Predation** relationship with [[Chilopoda]] (Centipede)
   - *Energy Pathway:* Invertebrate to Small Carnivore
-  - *Details:* Raccoon preying on Caterpillar as a secondary food source.
+  - *Details:* Raccoon preying on Centipede as a secondary food source.
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]

@@ -1,0 +1,59 @@
+# Three independently addressable MCP endpoints using the same code and database.
+# Scope is enforced in server.py; a key for one service cannot widen its scope.
+databases:
+  - name: biodiversity-postgres
+    plan: free
+    databaseName: biodiversity
+    user: biodiversity
+
+services:
+  - type: web
+    name: biodiversity-mcp-all
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py --sse
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: biodiversity-postgres
+          property: connectionString
+      - key: MCP_SCOPE
+        value: all
+      - key: MCP_API_KEY
+        generateValue: true
+
+  - type: web
+    name: biodiversity-mcp-tier23
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py --sse
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: biodiversity-postgres
+          property: connectionString
+      - key: MCP_SCOPE
+        value: tier2plus
+      - key: MCP_API_KEY
+        generateValue: true
+
+  - type: web
+    name: biodiversity-mcp-tier3
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py --sse
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: biodiversity-postgres
+          property: connectionString
+      - key: MCP_SCOPE
+        value: tier3only
+      - key: MCP_API_KEY
+        generateValue: true

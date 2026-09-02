@@ -4,18 +4,23 @@ scientific_name: "Diceros bicornis"
 common_name: "Rhinoceros"
 taxonomic_class: "Mammalia"
 primary_habitat: "Savannah"
+curation_score: 100
+priority_tier: 1
 iucn_status: "Critically Endangered (CR)"
 poaching_risk_score: 10
 protected_breeding_zone: "Ol Pejeta Rhino Sanctuary"
 patrol_frequency_days: 4
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-03-21"
+last_assessment_date: "2026-02-21"
 ---
 
 # Rhinoceros (*Diceros bicornis*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Savannah  
+
+**Curation Score:** 100/100
+**Priority Tier:** 1
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Critically Endangered (CR)

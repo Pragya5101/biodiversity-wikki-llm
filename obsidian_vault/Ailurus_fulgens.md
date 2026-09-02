@@ -4,18 +4,23 @@ scientific_name: "Ailurus fulgens"
 common_name: "RedPanda"
 taxonomic_class: "Mammalia"
 primary_habitat: "Forest"
+curation_score: 70
+priority_tier: 1
 iucn_status: "Endangered (EN)"
 poaching_risk_score: 7
 protected_breeding_zone: "Himalayan Forest Sanctuary"
 patrol_frequency_days: 7
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-21"
+last_assessment_date: "2026-06-24"
 ---
 
 # RedPanda (*Ailurus fulgens*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 70/100
+**Priority Tier:** 1
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Endangered (EN)

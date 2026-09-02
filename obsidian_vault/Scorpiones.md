@@ -4,18 +4,23 @@ scientific_name: "Scorpiones"
 common_name: "Scorpion"
 taxonomic_class: "Arachnida"
 primary_habitat: "Desert"
+curation_score: 10
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 1
 protected_breeding_zone: "Sahara Transit Buffer"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-20"
+last_assessment_date: "2026-03-05"
 ---
 
 # Scorpion (*Scorpiones*)
 
 **Taxonomic Class:** Arachnida  
 **Primary Habitat:** Desert  
+
+**Curation Score:** 10/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)
@@ -39,4 +44,4 @@ Active tracking program deployed in Sahara Transit Buffer. Strict anti-poaching 
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-30 03:06 UTC | 20.3306, 21.9298 | `YOLO-CAM-832` | 30.7°C | 80.90% | [[dummy_wildlife_dataset\train\images\telemetry_cam_004.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9925, 0.6472) dimensions 0.1866x0.7045 in source image frame. |
+| 2026-08-15 01:49 UTC | 22.7093, 20.1718 | `YOLO-CAM-447` | 22.0°C | 69.50% | [[dummy_wildlife_dataset\train\images\telemetry_cam_004.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9925, 0.6472) dimensions 0.1866x0.7045 in source image frame. |

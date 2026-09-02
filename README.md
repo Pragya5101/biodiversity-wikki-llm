@@ -1,138 +1,97 @@
-# Wildlife & Biodiversity Knowledge Wiki & FastMCP Server (Kaggle Dataset)
+# Wildlife & Biodiversity Priority Wiki
 
-A non-linear Knowledge Wiki using a Wildlife & Biodiversity dataset that connects to Claude via a Model Context Protocol (MCP) server. This setup uses the [Kaggle Wildlife Dataset](https://www.kaggle.com/datasets/banuprasadb/wildlife-dataset) to build a realistic 3-Tier relational database and an Obsidian Knowledge Graph.
+This project creates a PostgreSQL-backed biodiversity wiki, exports linked Markdown notes for Obsidian Graph View, and provides three independently scoped MCP endpoints for Claude.
 
----
+## Priority model
 
-## 🏗️ Architecture Overview
+Each species is a wiki record with a `curation_score` from 1–100 and a `priority_tier`:
 
-The system is structured in a **3-Tier Hierarchy** within a PostgreSQL database:
-1. **Tier 1 (Raw Observation & Telemetry)**: Real-time sensor readings, GPS logs, ambient temperatures, and associated image file references parsed directly from the Kaggle YOLO bounding-box annotation text files.
-2. **Tier 2 (Relational Network & Ecological Interactions)**: Predator-prey webs, symbiotic dependencies, and shared migration corridors generated based on ecological niches for 54 distinct animal species.
-3. **Tier 3 (High-Priority Conservation Intelligence)**: IUCN threat classifications, poaching risk indexes, protected breeding zones, and patrol schedules for the 54 species.
+| Priority tier | Score | Meaning | Endpoint access |
+| --- | --- | --- | --- |
+| Tier 1 | 70–100 | Highest-priority curated records | All-data endpoint only |
+| Tier 2 | 40–69 | Medium-priority curated records | All-data and Tier 2 + Tier 3 endpoints |
+| Tier 3 | 1–39 | Lowest-priority curated records | All three endpoints |
 
-An exporter script connects to this database to build a beautifully structured **Obsidian Vault** consisting of Markdown notes linked through non-linear wikilinks, allowing graph-view analysis of the species, corridors, and ecological relationships.
+Private curator notes are always assigned to Tier 3. The initial curation score is deterministically derived from the source conservation-risk score so the sample data has a reproducible assignment; edit `species.curation_score` and `species.priority_tier` to apply editorial judgement later.
 
-Finally, a **FastMCP Server** exposes this data hierarchy directly to Claude Desktop over **SSE (Server-Sent Events)**, allowing AI agents to query and reason non-linearly across the entire ecosystem.
+## MCP endpoints
 
----
+Render deploys the same server three times, each with its own API key and hard-coded scope:
 
-## 🗄️ 1. Database & Ingestion Setup
+| Endpoint | Render service | Visible records |
+| --- | --- | --- |
+| MCP 1 | `biodiversity-mcp-all` | Tier 1 + Tier 2 + Tier 3 |
+| MCP 2 | `biodiversity-mcp-tier23` | Tier 2 + Tier 3 |
+| MCP 3 | `biodiversity-mcp-tier3` | Tier 3 only |
 
-### Step A: Initialize Schema
-Load the database schema to set up the tables:
-```bash
-# Set your DATABASE_URL in your terminal session, e.g.:
-# export DATABASE_URL="postgresql://username:password@localhost:5432/biodiversity"
+The MCP tools are:
 
-# Run schema script
-psql $DATABASE_URL -f schema.sql
+- `search_wiki` — searches only records permitted by the endpoint.
+- `get_species_wiki` — returns a complete species profile only when the record is in scope; linked interaction partners are filtered too.
+
+## Local database and Obsidian
+
+Set a PostgreSQL connection string in `.env`:
+
+```env
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/biodiversity
 ```
 
-### Step B: Download the Kaggle Dataset (YOLO Format)
-Use the Kaggle CLI (or download it manually from [Kaggle](https://www.kaggle.com/datasets/banuprasadb/wildlife-dataset)) and unzip it:
-```bash
-kaggle datasets download -d banuprasadb/wildlife-dataset
-unzip wildlife-dataset.zip -d wildlife_dataset
-```
+Then initialize/reset the database, ingest data, and recreate the Obsidian graph:
 
-### Step C: Run the Ingestion Pipeline
-The ingestion script `ingest_kaggle_data.py` will read the YOLO coordinates and image filenames, map them to the 54 species master table, assign realistic locations based on natural ranges, define interactions, and populate Tier 1, 2, and 3:
-
-```bash
-# 1. Install dependencies
-pip install -r requirements.txt
-
-# 2. Ingest the downloaded dataset
+```powershell
 python ingest_kaggle_data.py --dataset-dir ./wildlife_dataset
-```
-
-> [!NOTE]
-> If you do not have the dataset downloaded yet and want to run a quick test, you can run:
-> `python ingest_kaggle_data.py`
-> This will automatically generate a folder named `dummy_wildlife_dataset` containing mock YOLO annotations and load them into the database to demonstrate the functionality.
-
----
-
-## 🗃️ 2. Obsidian Vault Exporter
-
-The exporter script queries the database and generates linked Markdown notes inside the `./obsidian_vault` directory:
-
-```bash
 python export_to_obsidian.py
 ```
 
-### Note Structure:
-- Each species file (e.g., `Panthera_leo.md`) contains YAML frontmatter, an active telemetry sighting table (including image references mapping back to the Kaggle dataset images), and links to other species they interact with (e.g., `[[Equus_quagga]]`) and corridors they share (e.g. `[[Serengeti_Migration_Corridor]]`).
-- When opened in Obsidian, the vault generates a multi-cluster non-linear graph representing food webs, predator-prey dynamics, and shared regional corridors.
+If the Kaggle download is not available, omit `--dataset-dir` and the ingestion script generates a small dummy dataset. Open `obsidian_vault` in Obsidian and select Graph View.
 
----
+## Deploy on Render
 
-## 🚀 3. Deployment Configuration (Render)
+1. Push this repository, including `render.yaml`, to GitHub. Never commit `.env`.
+2. In Render select **New → Blueprint** and choose the repository.
+3. The Blueprint creates one PostgreSQL database and three web services. Render generates a distinct `MCP_API_KEY` for each one.
+4. Populate the Render database by running `python ingest_kaggle_data.py --dataset-dir ./wildlife_dataset` with `DATABASE_URL` set to the Render database’s external connection string. A newly created production database is empty until this step.
+5. Verify each `https://SERVICE.onrender.com/healthz` URL, then use `https://SERVICE.onrender.com/sse` as that service’s MCP URL.
 
-Deploy this Python FastMCP server as a **Web Service** on [Render](https://render.com) using Server-Sent Events (SSE).
+The service rejects all MCP requests when its API key is absent or invalid. `/healthz` is intentionally public but returns no wiki data.
 
-### Step-by-Step Render Deployment:
-1. **Create a GitHub Repository**: Push `server.py`, `ingest_kaggle_data.py`, `export_to_obsidian.py`, `requirements.txt`, `schema.sql`, and `.gitignore` to your repository. Do **not** push `.env` — it holds your local database password and `.gitignore` now excludes it; set `DATABASE_URL` and the tier keys as Render environment variables instead (Step 4).
-2. **Create a Web Service on Render**:
-   - Link your GitHub repository to Render.
-   - Choose **Python** as the runtime environment.
-3. **Configure Service Settings**:
-   - **Name**: `biodiversity-mcp-server`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `python server.py`
-4. **Configure Environment Variables**:
-   - Add the following key-value pairs:
-     * `DATABASE_URL`: Your PostgreSQL database URI (e.g., from Neon, Supabase, or Render PostgreSQL).
-     * `MCP_API_KEY_TIER1`: a secret string you generate — a connection using this key can only call `get_tier1_sightings`.
-     * `MCP_API_KEY_TIER2`: a second, different secret string — unlocks `get_tier1_sightings` and `get_tier2_interactions`.
-     * `MCP_API_KEY_TIER3`: a third, different secret string — unlocks all three tools, including `get_tier3_risk_intelligence` (poaching risk, protected breeding zones). Keep this one the most tightly held.
-   - Leave all three unset only if you deliberately want the deployed server fully open (no clearance checks at all). Set at least one and the server starts rejecting unrecognized/missing keys with 401.
-   - `PORT` does not need to be set manually — Render injects it, and the server now auto-detects that and switches to SSE mode even if the Start Command below is left as-is.
-5. **Deploy**: Click **Create Web Service**. Once the build succeeds, the server will expose endpoints at:
-   - SSE Connection: `https://<your-app-name>.onrender.com/sse`
-   - Message Channel: `https://<your-app-name>.onrender.com/messages`
+## Claude connector configuration
 
----
+Replace every placeholder with the exact Render service URL and that service’s own generated `MCP_API_KEY`.
 
-## 🔌 4. Client Integration (Claude Desktop Configuration)
-
-To connect Claude Desktop to your deployed Render service, add the following configuration to your `claude_desktop_config.json` file. The `x-api-key` you paste in determines the clearance level of that connection — use `MCP_API_KEY_TIER3` for your own full-access setup, and hand out `MCP_API_KEY_TIER1` (or TIER2) to anyone who should only see the lower-sensitivity tiers.
-
-### Config Location:
-- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
-- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-### JSON Snippet:
 ```json
 {
   "mcpServers": {
-    "biodiversity-wiki": {
+    "biodiversity-all": {
       "type": "sse",
-      "url": "https://<your-app-name>.onrender.com/sse",
-      "headers": {
-        "x-api-key": "<one of MCP_API_KEY_TIER1 / TIER2 / TIER3, matching the clearance you want this connection to have>"
-      }
+      "url": "https://biodiversity-mcp-all.onrender.com/sse",
+      "headers": { "x-api-key": "MCP_1_KEY" }
+    },
+    "biodiversity-tier23": {
+      "type": "sse",
+      "url": "https://biodiversity-mcp-tier23.onrender.com/sse",
+      "headers": { "x-api-key": "MCP_2_KEY" }
+    },
+    "biodiversity-tier3": {
+      "type": "sse",
+      "url": "https://biodiversity-mcp-tier3.onrender.com/sse",
+      "headers": { "x-api-key": "MCP_3_KEY" }
     }
   }
 }
 ```
-*Replace `<your-app-name>` with your actual Render deployment subdomain. Omit the `headers` block only if you deliberately left all three tier keys unset on Render.*
 
----
+Add only the connectors appropriate for the person using Claude. Do not share the all-data key with a Tier-3-only user.
 
-## 📝 5. Testing Prompts
+## Verification
 
-Verify Claude's capability to traverse all three database tiers non-linearly using these test queries:
+```powershell
+python -m py_compile server.py ingest_kaggle_data.py export_to_obsidian.py
+```
 
-### Prompt 1: High-Risk Species Sighting Analysis (Tiers 3 ➡️ 1)
-> "Identify the species in the database that has the highest poaching risk score (Tier 3). Once found, retrieve its 5 most recent telemetry observations (Tier 1), and report the coordinates and associated Kaggle image path for each sighting."
-*Testing: Queries Tier 3 to find a highly protected species (like Tiger or Elephant), then shifts to Tier 1 to fetch and summarize raw telemetry data with image path links.*
+Test the required isolation after deployment:
 
-### Prompt 2: Food-Web Ecological Ripple Effects (Tiers 3 ➡️ 2)
-> "Check the protected breeding zone info for the Tiger (Panthera tigris) in Tier 3. Then, retrieve all of its ecological interactions from Tier 2. If the Tiger population were to collapse, what prey species in that forest network would experience population spikes, and what are their primary habitats?"
-*Testing: Queries Tier 3 for base species details, then traverses Tier 2 interactions to analyze secondary food-web impacts.*
-
-### Prompt 3: Corridor Threat Evaluation & Conservation Briefing (Tiers 2 ➡️ 3 ➡️ 1)
-> "For the species *Panthera onca* (Jaguar), retrieve its shared corridors and their threat levels from Tier 2. Cross-reference this with its poaching risk score and patrol frequency from Tier 3, and check its latest GPS telemetry and image path from Tier 1. Write an emergency recommendations brief for rangers patrolling its protected breeding zone."
-*Testing: Fully traverses all three tiers in a single prompt (corridors in Tier 2, security/patrol values in Tier 3, and coordinates/image path in Tier 1).*
+- MCP 1 can search a Tier 1, Tier 2, and Tier 3 record.
+- MCP 2 cannot find a Tier 1 record but can find Tier 2 and Tier 3 records.
+- MCP 3 can find only Tier 3 records and its Tier-3 private notes.

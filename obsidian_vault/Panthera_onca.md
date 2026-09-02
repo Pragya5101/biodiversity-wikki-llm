@@ -4,18 +4,23 @@ scientific_name: "Panthera onca"
 common_name: "Jaguar"
 taxonomic_class: "Mammalia"
 primary_habitat: "Forest"
+curation_score: 80
+priority_tier: 1
 iucn_status: "Near Threatened (NT)"
 poaching_risk_score: 8
 protected_breeding_zone: "Pantanal Reserve Sector Delta"
 patrol_frequency_days: 6
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-02-25"
+last_assessment_date: "2026-08-13"
 ---
 
 # Jaguar (*Panthera onca*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 80/100
+**Priority Tier:** 1
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Near Threatened (NT)
@@ -29,12 +34,12 @@ Active tracking program deployed in Pantanal Reserve Sector Delta. Strict anti-p
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
+- **Predation** relationship with [[Sciuridae]] (Squirrel)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Forest ecosystems where Jaguar limits Squirrel overgrazing.
 - **Predation** relationship with [[Cercopithecidae]] (Monkey)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Jaguar limits Monkey overgrazing.
-- **Predation** relationship with [[Cervidae]] (Deer)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Jaguar limits Deer overgrazing.
 
 ### Connected Corridors
 - [[Amazon-Guiana_Ecological_Corridor]]
@@ -42,4 +47,4 @@ Active tracking program deployed in Pantanal Reserve Sector Delta. Strict anti-p
 ## 📡 Tier 1: Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-05 14:11 UTC | -3.4765, -60.3399 | `YOLO-CAM-729` | 17.8°C | 58.80% | [[dummy_wildlife_dataset\train\images\telemetry_cam_003.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9689, 0.7058) dimensions 0.3928x0.4733 in source image frame. |
+| 2026-08-21 14:30 UTC | -3.9221, -61.1900 | `YOLO-CAM-711` | 30.5°C | 89.30% | [[dummy_wildlife_dataset\train\images\telemetry_cam_003.jpg]] | YOLO Object Detection event. Bounding box coordinates center (0.9689, 0.7058) dimensions 0.3928x0.4733 in source image frame. |

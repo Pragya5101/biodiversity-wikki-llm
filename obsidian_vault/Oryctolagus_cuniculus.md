@@ -4,18 +4,23 @@ scientific_name: "Oryctolagus cuniculus"
 common_name: "Rabbit"
 taxonomic_class: "Mammalia"
 primary_habitat: "Grasslands"
+curation_score: 10
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Wildflower Corridor"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-08-06"
+last_assessment_date: "2026-05-16"
 ---
 
 # Rabbit (*Oryctolagus cuniculus*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Grasslands  
+
+**Curation Score:** 10/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)

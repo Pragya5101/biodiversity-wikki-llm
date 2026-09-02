@@ -4,18 +4,23 @@ scientific_name: "Picidae"
 common_name: "Woodpecker"
 taxonomic_class: "Aves"
 primary_habitat: "Forest"
+curation_score: 10
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Forest Core"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-06-04"
+last_assessment_date: "2026-08-21"
 ---
 
 # Woodpecker (*Picidae*)
 
 **Taxonomic Class:** Aves  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 10/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)

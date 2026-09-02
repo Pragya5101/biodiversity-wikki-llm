@@ -4,18 +4,23 @@ scientific_name: "Ursus arctos"
 common_name: "Bear"
 taxonomic_class: "Mammalia"
 primary_habitat: "Forest"
+curation_score: 30
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 3
 protected_breeding_zone: "Rocky Mountain North Buffer"
 patrol_frequency_days: 11
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-04-11"
+last_assessment_date: "2026-04-14"
 ---
 
 # Bear (*Ursus arctos*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 30/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)
@@ -29,12 +34,15 @@ Active tracking program deployed in Rocky Mountain North Buffer. Strict anti-poa
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Cervidae]] (Deer)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Forest ecosystems where Bear limits Deer overgrazing.
 - **Predation** relationship with [[Cercopithecidae]] (Monkey)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Forest ecosystems where Bear limits Monkey overgrazing.
+- **Predation** relationship with [[Sciuridae]] (Squirrel)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Forest ecosystems where Bear limits Squirrel overgrazing.
+- **Predation** relationship with [[Cervidae]] (Deer)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Forest ecosystems where Bear limits Deer overgrazing.
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]

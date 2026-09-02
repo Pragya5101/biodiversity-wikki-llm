@@ -4,18 +4,23 @@ scientific_name: "Erinaceinae"
 common_name: "Hedgehog"
 taxonomic_class: "Mammalia"
 primary_habitat: "Forest"
+curation_score: 10
+priority_tier: 3
 iucn_status: "Least Concern (LC)"
 poaching_risk_score: 1
 protected_breeding_zone: "Eurasian Forest Core"
 patrol_frequency_days: 13
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-03-28"
+last_assessment_date: "2026-07-02"
 ---
 
 # Hedgehog (*Erinaceinae*)
 
 **Taxonomic Class:** Mammalia  
 **Primary Habitat:** Forest  
+
+**Curation Score:** 10/100
+**Priority Tier:** 3
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Least Concern (LC)

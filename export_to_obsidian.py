@@ -56,6 +56,8 @@ def export_vault():
                     s.common_name,
                     s.taxonomic_class,
                     s.primary_habitat,
+                    s.curation_score,
+                    s.priority_tier,
                     ci.iucn_status,
                     ci.poaching_risk_score,
                     ci.protected_breeding_zone,
@@ -236,6 +238,8 @@ def export_vault():
             f.write(f"common_name: \"{common_name}\"\n")
             f.write(f"taxonomic_class: \"{species['taxonomic_class']}\"\n")
             f.write(f"primary_habitat: \"{species['primary_habitat']}\"\n")
+            f.write(f"curation_score: {species['curation_score']}\n")
+            f.write(f"priority_tier: {species['priority_tier']}\n")
             if species['iucn_status']:
                 f.write(f"iucn_status: \"{species['iucn_status']}\"\n")
                 f.write(f"poaching_risk_score: {species['poaching_risk_score']}\n")
@@ -249,6 +253,8 @@ def export_vault():
             f.write(f"# {common_name} (*{sci_name}*)\n\n")
             f.write(f"**Taxonomic Class:** {species['taxonomic_class']}  \n")
             f.write(f"**Primary Habitat:** {species['primary_habitat']}  \n\n")
+            f.write(f"**Curation Score:** {species['curation_score']}/100\n")
+            f.write(f"**Priority Tier:** {species['priority_tier']}\n\n")
 
             # Tier 3 - Conservation Intelligence
             f.write("## 🛡️ Tier 3: Conservation Intelligence\n")

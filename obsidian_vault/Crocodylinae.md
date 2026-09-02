@@ -4,18 +4,23 @@ scientific_name: "Crocodylinae"
 common_name: "Crocodile"
 taxonomic_class: "Reptilia"
 primary_habitat: "Wetlands"
+curation_score: 60
+priority_tier: 2
 iucn_status: "Vulnerable (VU)"
 poaching_risk_score: 6
 protected_breeding_zone: "Kakadu Wetlands Area B"
 patrol_frequency_days: 8
 security_clearance: "RESTRICTED"
-last_assessment_date: "2026-05-22"
+last_assessment_date: "2026-07-14"
 ---
 
 # Crocodile (*Crocodylinae*)
 
 **Taxonomic Class:** Reptilia  
 **Primary Habitat:** Wetlands  
+
+**Curation Score:** 60/100
+**Priority Tier:** 2
 
 ## 🛡️ Tier 3: Conservation Intelligence
 - **IUCN Status:** Vulnerable (VU)
@@ -29,12 +34,12 @@ Active tracking program deployed in Kakadu Wetlands Area B. Strict anti-poaching
 
 ## 🕸️ Tier 2: Relational Network & Ecological Interactions
 ### Species Interactions
-- **Predation** relationship with [[Anas_platyrhynchos]] (Duck)
-  - *Energy Pathway:* Herbivore to Apex Carnivore
-  - *Details:* Natural predation observed in Wetlands ecosystems where Crocodile limits Duck overgrazing.
 - **Predation** relationship with [[Anser_anser]] (Goose)
   - *Energy Pathway:* Herbivore to Apex Carnivore
   - *Details:* Natural predation observed in Wetlands ecosystems where Crocodile limits Goose overgrazing.
+- **Predation** relationship with [[Anas_platyrhynchos]] (Duck)
+  - *Energy Pathway:* Herbivore to Apex Carnivore
+  - *Details:* Natural predation observed in Wetlands ecosystems where Crocodile limits Duck overgrazing.
 
 ### Connected Corridors
 - [[Great_Barrier_Coast_Buffer_Zone]]

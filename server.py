@@ -1,355 +1,248 @@
-# server.py
-"""
-Model Context Protocol (MCP) Server for Wildlife & Biodiversity Wiki
-Exposes Tier 1, Tier 2, and Tier 3 data endpoints to LLMs via FastMCP with SSE.
+"""MCP server for the priority-scoped Wildlife & Biodiversity Wiki.
+
+Deploy this same service three times with MCP_SCOPE set to ``all``,
+``tier2plus``, or ``tier3only``.  Each deployment uses its own MCP_API_KEY.
 """
 
 import os
 import sys
 from contextlib import contextmanager
-from contextvars import ContextVar
+
 import psycopg2
 import psycopg2.extras
-from psycopg2.pool import SimpleConnectionPool
 from dotenv import load_dotenv
+from psycopg2.pool import SimpleConnectionPool
 
-from mcp.server.fastmcp import FastMCP
+try:
+    from mcp.server.fastmcp import FastMCP
+except ModuleNotFoundError:
+    from mcp.server.mcpserver import MCPServer as FastMCP
 
-# Load environment variables
+
 load_dotenv()
+mcp = FastMCP("Wildlife Biodiversity Priority Wiki")
 
-# Define the MCP server name
-mcp = FastMCP("Wildlife Biodiversity Wiki")
-
-# ==============================================================================
-# Tiered credential model
-# ==============================================================================
-# Three separate API keys, one per clearance level. A key only unlocks its own
-# tier and every tier below it:
-#   MCP_API_KEY_TIER1 -> Tier 1 (general telemetry) only
-#   MCP_API_KEY_TIER2 -> Tier 1 + Tier 2 (ecological network)
-#   MCP_API_KEY_TIER3 -> Tier 1 + Tier 2 + Tier 3 (poaching risk / breeding zones)
-# Whichever key a Claude connector is configured with determines what that
-# connection can see - paste the Tier 3 key only into your own trusted config,
-# hand out the Tier 1 key for anything general-purpose.
-TIER_KEYS = {
-    os.environ.get("MCP_API_KEY_TIER1"): 1,
-    os.environ.get("MCP_API_KEY_TIER2"): 2,
-    os.environ.get("MCP_API_KEY_TIER3"): 3,
+SCOPES = {
+    "all": (1, 2, 3),
+    "tier2plus": (2, 3),
+    "tier3only": (3,),
 }
-TIER_KEYS.pop(None, None)  # drop unset env vars
-ANY_TIER_KEY_CONFIGURED = len(TIER_KEYS) > 0
+MCP_SCOPE = os.environ.get("MCP_SCOPE", "all").lower()
+if MCP_SCOPE not in SCOPES:
+    raise RuntimeError("MCP_SCOPE must be one of: all, tier2plus, tier3only.")
+ALLOWED_TIERS = SCOPES[MCP_SCOPE]
+MCP_API_KEY = os.environ.get("MCP_API_KEY")
 
-TIER_NAMES = {1: "Tier 1 (General)", 2: "Tier 2 (High Priority)", 3: "Tier 3 (Highest Priority)"}
-
-# Per-request clearance level. Set by ApiKeyMiddleware on every HTTP request
-# (both /sse and /messages), read by each tool at call time. Defaults to 3
-# (no restriction) when no tier keys are configured at all, so local stdio
-# use with Claude Desktop keeps working unauthenticated.
-current_clearance: ContextVar[int] = ContextVar("current_clearance", default=3 if not ANY_TIER_KEY_CONFIGURED else 0)
-
-
-def require_clearance(min_level: int, label: str):
-    """Returns an error string if the caller's clearance is below min_level, else None."""
-    level = current_clearance.get()
-    if level < min_level:
-        return (
-            f"Access denied: {label} requires {TIER_NAMES[min_level]} credentials. "
-            f"This connection is authenticated at clearance level {level or 'none'}."
-        )
-    return None
-
-# Fetch database configuration
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
-# Setup PostgreSQL Database connection pool
-db_pool = None
-
-def init_db_pool():
-    global db_pool
-    if not DATABASE_URL:
-        if "--sse" in sys.argv:
-            print("Warning: DATABASE_URL is not set. Database tools will fail when queried.", file=sys.stderr)
-        return None
-    try:
-        db_pool = SimpleConnectionPool(
-            minconn=1,
-            maxconn=10,
-            dsn=DATABASE_URL
-        )
-        if "--sse" in sys.argv:
-            print("PostgreSQL Database Connection Pool initialized successfully.", file=sys.stderr)
-    except Exception as e:
-        if "--sse" in sys.argv:
-            print(f"Error initializing connection pool: {e}", file=sys.stderr)
-        db_pool = None
-
-# Initialize pool on startup
-init_db_pool()
-
-@contextmanager
-def get_db_cursor():
-    """Acquires a database connection from the pool and yields a dict-based cursor."""
-    global db_pool
-    # Re-initialize pool if it went down or wasn't set (e.g. env loaded late)
-    if not db_pool:
-        init_db_pool()
-        if not db_pool:
-            raise RuntimeError("Database pool not initialized. Please set DATABASE_URL environment variable.")
-    
-    conn = db_pool.getconn()
-    try:
-        yield conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        conn.commit()
-    except Exception as e:
-        conn.rollback()
-        raise e
-    finally:
-        db_pool.putconn(conn)
-
-def resolve_species(cur, species_name: str):
-    """
-    Helper function to resolve common or scientific species name to database ID.
-    Returns species record dictionary or None.
-    """
-    query = """
-        SELECT id, scientific_name, common_name, taxonomic_class, primary_habitat 
-        FROM species 
-        WHERE LOWER(scientific_name) = LOWER(%s) OR LOWER(common_name) = LOWER(%s)
-        LIMIT 1
-    """
-    cur.execute(query, (species_name.strip(), species_name.strip()))
-    return cur.fetchone()
-
-# ==============================================================================
-# MCP Tools
-# ==============================================================================
-
-@mcp.tool()
-def get_tier1_sightings(species_name: str, limit: int = 10) -> str:
-    """
-    Retrieve raw observation & telemetry data (sighting times, coordinates, ambient temp, sensor notes)
-    for a given species by common or scientific name.
-    """
-    denial = require_clearance(1, "Tier 1 telemetry data")
-    if denial:
-        return denial
-    try:
-        with get_db_cursor() as cur:
-            species = resolve_species(cur, species_name)
-            if not species:
-                return f"Species '{species_name}' not found in the database. Double-check scientific or common spelling."
-            
-            query = """
-                SELECT sighting_time, latitude, longitude, sensor_id, battery_level_pct, ambient_temp_c, image_path, notes
-                FROM sightings
-                WHERE species_id = %s
-                ORDER BY sighting_time DESC
-                LIMIT %s
-            """
-            cur.execute(query, (species['id'], limit))
-            sightings = cur.fetchall()
-            
-            if not sightings:
-                return f"No telemetry observations recorded for {species['common_name']} ({species['scientific_name']})."
-            
-            # Format as Markdown table
-            output = [
-                f"### Tier 1 Telemetry Observations for {species['common_name']} (*{species['scientific_name']}*)",
-                f"Primary Habitat: {species['primary_habitat']} | Taxonomy: {species['taxonomic_class']}\n",
-                "| Timestamp | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Path Reference | Observation Notes |",
-                "| --- | --- | --- | --- | --- | --- | --- |"
-            ]
-            for row in sightings:
-                time_str = row['sighting_time'].strftime("%Y-%m-%d %H:%M UTC")
-                battery = f"{row['battery_level_pct']}%" if row['battery_level_pct'] is not None else "N/A"
-                temp = f"{row['ambient_temp_c']}°C" if row['ambient_temp_c'] is not None else "N/A"
-                img_path = f"`{row['image_path']}`" if row['image_path'] else "-"
-                notes = row['notes'] if row['notes'] else "-"
-                output.append(f"| {time_str} | {float(row['latitude']):.4f}, {float(row['longitude']):.4f} | `{row['sensor_id']}` | {temp} | {battery} | {img_path} | {notes} |")
-                
-            return "\n".join(output)
-            
-    except Exception as e:
-        return f"Database error occurred: {str(e)}"
-
-
-@mcp.tool()
-def get_tier2_interactions(species_name: str) -> str:
-    """
-    Retrieve ecological relationships (predator-prey, mutualism, food-web links)
-    and shared environmental corridors for a given species.
-    """
-    denial = require_clearance(2, "Tier 2 ecological network data")
-    if denial:
-        return denial
-    try:
-        with get_db_cursor() as cur:
-            species = resolve_species(cur, species_name)
-            if not species:
-                return f"Species '{species_name}' not found in the database."
-
-            # Query Interactions
-            query_interactions = """
-                SELECT 
-                    s_a.common_name as sa_common, s_a.scientific_name as sa_sci,
-                    s_b.common_name as sb_common, s_b.scientific_name as sb_sci,
-                    ei.interaction_type, ei.energy_transfer_pathway, ei.interaction_details
-                FROM ecological_interactions ei
-                JOIN species s_a ON ei.species_a_id = s_a.id
-                JOIN species s_b ON ei.species_b_id = s_b.id
-                WHERE ei.species_a_id = %s OR ei.species_b_id = %s
-            """
-            cur.execute(query_interactions, (species['id'], species['id']))
-            interactions = cur.fetchall()
-
-            # Query Shared Corridors
-            query_corridors = """
-                SELECT c.name, c.geographic_region, c.corridor_type, c.threat_level
-                FROM corridors c
-                JOIN species_corridors sc ON c.id = sc.corridor_id
-                WHERE sc.species_id = %s
-            """
-            cur.execute(query_corridors, (species['id'],))
-            corridors = cur.fetchall()
-
-            output = [f"### Tier 2 Ecological & Network Profile: {species['common_name']} (*{species['scientific_name']}*)"]
-
-            # Format Interactions
-            output.append("\n#### 🕸️ Food Web & Ecological Interactions")
-            if not interactions:
-                output.append("*No documented interactions for this species in the network database.*")
-            else:
-                for row in interactions:
-                    # Determine directional relationship
-                    if row['sa_sci'].lower() == species['scientific_name'].lower():
-                        role = "Source"
-                        partner = f"{row['sb_common']} (*{row['sb_sci']}*)"
-                    else:
-                        role = "Target"
-                        partner = f"{row['sa_common']} (*{row['sa_sci']}*)"
-                    
-                    output.append(
-                        f"- **Type:** {row['interaction_type']} relationship with {partner}\n"
-                        f"  - *Pathway:* {row['energy_transfer_pathway']}\n"
-                        f"  - *Details:* {row['interaction_details']}"
-                    )
-
-            # Format Corridors
-            output.append("\n#### 🗺️ Shared Corridors & Habitat Connections")
-            if not corridors:
-                output.append("*No migratory or geographical corridors registered for this species.*")
-            else:
-                for row in corridors:
-                    output.append(
-                        f"- **Corridor Name:** {row['name']}\n"
-                        f"  - *Region:* {row['geographic_region']}\n"
-                        f"  - *Type:* {row['corridor_type']} | *Threat Level:* {row['threat_level']}"
-                    )
-
-            return "\n".join(output)
-
-    except Exception as e:
-        return f"Database error occurred: {str(e)}"
-
-
-@mcp.tool()
-def get_tier3_risk_intelligence(species_name: str) -> str:
-    """
-    Retrieve high-priority conservation intelligence data (IUCN status,
-    poaching risk scores, protected breeding zones, security clearance) for a given species.
-    """
-    denial = require_clearance(3, "Tier 3 conservation intelligence")
-    if denial:
-        return denial
-    try:
-        with get_db_cursor() as cur:
-            species = resolve_species(cur, species_name)
-            if not species:
-                return f"Species '{species_name}' not found in the database."
-
-            query = """
-                SELECT iucn_status, poaching_risk_score, protected_breeding_zone, 
-                       patrol_frequency_days, security_clearance_level, conservation_measures, 
-                       last_assessment_date
-                FROM conservation_intelligence
-                WHERE species_id = %s
-            """
-            cur.execute(query, (species['id'],))
-            intel = cur.fetchone()
-
-            if not intel:
-                return f"No Tier 3 Conservation Intelligence recorded for {species['common_name']} (*{species['scientific_name']}*)."
-
-            # Format Response
-            output = [
-                f"### 🛡️ Tier 3 Conservation Intelligence: {species['common_name']} (*{species['scientific_name']}*)",
-                f"**[SECURITY LEVEL: {intel['security_clearance_level']}]**\n",
-                f"- **IUCN Red List Status:** {intel['iucn_status']}",
-                f"- **Poaching Threat Risk Score:** {intel['poaching_risk_score']}/10",
-                f"- **Protected Breeding Zone:** {intel['protected_breeding_zone']}",
-                f"- **Ranger Patrol Interval:** Every {intel['patrol_frequency_days']} days",
-                f"- **Last Security Assessment:** {intel['last_assessment_date']}\n",
-                "#### Active Conservation Protocols",
-                intel['conservation_measures'] if intel['conservation_measures'] else "No protocols active."
-            ]
-            return "\n".join(output)
-
-    except Exception as e:
-        return f"Database error occurred: {str(e)}"
-
-
-# ==============================================================================
-# FastAPI / ASGI Application Setup (for SSE Deployment)
-# ==============================================================================
-
-# Expose Starlette app containing SSE routes (/sse and /messages)
-app = mcp.sse_app()
-
-# --- Tiered access control ----------------------------------------------------
-# Reads the `x-api-key` header (or ?api_key=) on every request - both the
-# long-lived /sse connection and each /messages POST - looks it up in
-# TIER_KEYS, and sets current_clearance for the tool functions above to check.
-# If no MCP_API_KEY_TIER* env vars are set at all, the server stays open at
-# full clearance (dev/local mode). Once any tier key is configured, an
-# unrecognized or missing key is rejected outright (401) rather than silently
-# defaulting to level 0, so a misconfigured client fails loudly instead of
-# just seeing empty/denied tool results.
-if ANY_TIER_KEY_CONFIGURED:
-    from starlette.middleware.base import BaseHTTPMiddleware
-    from starlette.responses import JSONResponse
-
-    class TieredApiKeyMiddleware(BaseHTTPMiddleware):
-        async def dispatch(self, request, call_next):
-            supplied = request.headers.get("x-api-key") or request.query_params.get("api_key")
-            level = TIER_KEYS.get(supplied)
-            if level is None:
-                return JSONResponse({"error": "Unauthorized: missing or invalid API key"}, status_code=401)
-            current_clearance.set(level)
-            return await call_next(request)
-
-    app.add_middleware(TieredApiKeyMiddleware)
-
-# Render (and most PaaS) inject PORT automatically for any deployed web
-# service, so use its presence as a second signal to switch into SSE mode
-# even if the Start Command forgets the --sse flag.
-_should_run_sse = (
+IS_WEB_TRANSPORT = (
     "--sse" in sys.argv
     or os.environ.get("TRANSPORT") == "sse"
     or os.environ.get("RENDER") is not None
     or os.environ.get("PORT") is not None
 )
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
+db_pool = None
+
+
+def init_db_pool():
+    global db_pool
+    if not DATABASE_URL:
+        return
+    try:
+        db_pool = SimpleConnectionPool(minconn=1, maxconn=10, dsn=DATABASE_URL)
+    except Exception as error:
+        print(f"Database connection pool unavailable: {error}", file=sys.stderr)
+        db_pool = None
+
+
+init_db_pool()
+
+
+@contextmanager
+def get_db_cursor():
+    global db_pool
+    if not db_pool:
+        init_db_pool()
+    if not db_pool:
+        raise RuntimeError("Database pool not initialized. Set DATABASE_URL.")
+    connection = db_pool.getconn()
+    try:
+        yield connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        connection.commit()
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        db_pool.putconn(connection)
+
+
+def scope_clause(column: str = "priority_tier") -> tuple[str, tuple[int, ...]]:
+    placeholders = ", ".join(["%s"] * len(ALLOWED_TIERS))
+    return f"{column} IN ({placeholders})", ALLOWED_TIERS
+
+
+def resolve_species(cursor, species_name: str):
+    scope_sql, scope_params = scope_clause("priority_tier")
+    cursor.execute(
+        f"""
+        SELECT id, scientific_name, common_name, taxonomic_class, primary_habitat,
+               curation_score, priority_tier
+        FROM species
+        WHERE (LOWER(scientific_name) = LOWER(%s) OR LOWER(common_name) = LOWER(%s))
+          AND {scope_sql}
+        LIMIT 1
+        """,
+        (species_name.strip(), species_name.strip(), *scope_params),
+    )
+    return cursor.fetchone()
+
+
+def unavailable_message(species_name: str) -> str:
+    return (
+        f"'{species_name}' is not available through this endpoint. "
+        f"This server exposes priority tiers {', '.join(map(str, ALLOWED_TIERS))}."
+    )
+
+
+@mcp.tool()
+def search_wiki(query: str, limit: int = 20) -> str:
+    """Search the species records that this MCP endpoint is permitted to expose."""
+    if not isinstance(limit, int) or isinstance(limit, bool) or not 1 <= limit <= 50:
+        return "Invalid limit: provide a whole number from 1 to 50."
+    try:
+        scope_sql, scope_params = scope_clause("priority_tier")
+        with get_db_cursor() as cursor:
+            cursor.execute(
+                f"""
+                SELECT common_name, scientific_name, primary_habitat, curation_score, priority_tier
+                FROM species
+                WHERE (common_name ILIKE %s OR scientific_name ILIKE %s)
+                  AND {scope_sql}
+                ORDER BY priority_tier, curation_score DESC, common_name
+                LIMIT %s
+                """,
+                (f"%{query.strip()}%", f"%{query.strip()}%", *scope_params, limit),
+            )
+            rows = cursor.fetchall()
+        if not rows:
+            return "No matching records are available through this endpoint."
+        output = [f"### Wiki search ({MCP_SCOPE})", "| Species | Habitat | Score | Priority tier |", "| --- | --- | --- | --- |"]
+        output.extend(
+            f"| {row['common_name']} (*{row['scientific_name']}*) | {row['primary_habitat']} | {row['curation_score']} | {row['priority_tier']} |"
+            for row in rows
+        )
+        return "\n".join(output)
+    except Exception as error:
+        return f"Database error: {error}"
+
+
+@mcp.tool()
+def get_species_wiki(species_name: str, sightings_limit: int = 10) -> str:
+    """Return the complete wiki profile for one species, if its priority tier is in this endpoint's scope."""
+    if not isinstance(sightings_limit, int) or isinstance(sightings_limit, bool) or not 1 <= sightings_limit <= 100:
+        return "Invalid sightings_limit: provide a whole number from 1 to 100."
+    try:
+        with get_db_cursor() as cursor:
+            species = resolve_species(cursor, species_name)
+            if not species:
+                return unavailable_message(species_name)
+
+            cursor.execute(
+                """SELECT sighting_time, latitude, longitude, sensor_id, ambient_temp_c, image_path, notes
+                   FROM sightings WHERE species_id = %s ORDER BY sighting_time DESC LIMIT %s""",
+                (species["id"], sightings_limit),
+            )
+            sightings = cursor.fetchall()
+            cursor.execute(
+                """SELECT iucn_status, poaching_risk_score, protected_breeding_zone, patrol_frequency_days,
+                          security_clearance_level, conservation_measures, last_assessment_date
+                   FROM conservation_intelligence WHERE species_id = %s""",
+                (species["id"],),
+            )
+            intelligence = cursor.fetchone()
+            scope_sql, scope_params = scope_clause("partner.priority_tier")
+            cursor.execute(
+                f"""
+                SELECT partner.common_name, partner.scientific_name, ei.interaction_type, ei.interaction_details
+                FROM ecological_interactions ei
+                JOIN species partner ON partner.id = CASE
+                    WHEN ei.species_a_id = %s THEN ei.species_b_id ELSE ei.species_a_id END
+                WHERE (ei.species_a_id = %s OR ei.species_b_id = %s) AND {scope_sql}
+                """,
+                (species["id"], species["id"], species["id"], *scope_params),
+            )
+            interactions = cursor.fetchall()
+            cursor.execute(
+                """SELECT c.name, c.geographic_region, c.corridor_type, c.threat_level
+                   FROM corridors c JOIN species_corridors sc ON sc.corridor_id = c.id
+                   WHERE sc.species_id = %s""",
+                (species["id"],),
+            )
+            corridors = cursor.fetchall()
+            cursor.execute(
+                "SELECT note FROM private_notes WHERE species_id = %s AND priority_tier = 3 ORDER BY created_at DESC",
+                (species["id"],),
+            )
+            private_notes = cursor.fetchall()
+
+        output = [
+            f"# {species['common_name']} (*{species['scientific_name']}*)",
+            f"Scope: `{MCP_SCOPE}` | Curation score: **{species['curation_score']}** | Priority tier: **{species['priority_tier']}**",
+            f"Habitat: {species['primary_habitat']} | Taxonomy: {species['taxonomic_class']}",
+        ]
+        if intelligence:
+            output += ["\n## Conservation", f"- IUCN: {intelligence['iucn_status']}", f"- Poaching risk: {intelligence['poaching_risk_score']}/10", f"- Breeding zone: {intelligence['protected_breeding_zone']}"]
+        output.append("\n## Ecological links")
+        output.extend(f"- {row['interaction_type']}: {row['common_name']} (*{row['scientific_name']}*) — {row['interaction_details']}" for row in interactions) or output.append("- None in this endpoint scope.")
+        output.append("\n## Corridors")
+        output.extend(f"- {row['name']} ({row['corridor_type']}, {row['threat_level']} threat)" for row in corridors) or output.append("- None recorded.")
+        output.append("\n## Recent sightings")
+        output.extend(f"- {row['sighting_time']:%Y-%m-%d %H:%M UTC}: {float(row['latitude']):.4f}, {float(row['longitude']):.4f}; image `{row['image_path'] or '-'}`" for row in sightings) or output.append("- None recorded.")
+        if private_notes:
+            output.append("\n## Private curator notes (Tier 3)")
+            output.extend(f"- {row['note']}" for row in private_notes)
+        return "\n".join(output)
+    except Exception as error:
+        return f"Database error: {error}"
+
+
+async def healthcheck(request):
+    from starlette.responses import JSONResponse
+    return JSONResponse({"status": "ok", "scope": MCP_SCOPE, "allowed_tiers": ALLOWED_TIERS})
+
+
+try:
+    from mcp.server.transport_security import TransportSecuritySettings
+    app = mcp.sse_app(transport_security=TransportSecuritySettings(enable_dns_rebinding_protection=False))
+except (ImportError, TypeError):
+    app = mcp.sse_app()
+
+from starlette.routing import Route
+app.routes.append(Route("/healthz", healthcheck))
+
+if IS_WEB_TRANSPORT:
+    from starlette.middleware.base import BaseHTTPMiddleware
+    from starlette.responses import JSONResponse
+
+    class ApiKeyMiddleware(BaseHTTPMiddleware):
+        async def dispatch(self, request, call_next):
+            if request.url.path == "/healthz":
+                return await call_next(request)
+            if not MCP_API_KEY:
+                return JSONResponse({"error": "MCP_API_KEY is not configured"}, status_code=503)
+            supplied = request.headers.get("x-api-key") or request.query_params.get("api_key")
+            if supplied != MCP_API_KEY:
+                return JSONResponse({"error": "Unauthorized: missing or invalid API key"}, status_code=401)
+            return await call_next(request)
+
+    app.add_middleware(ApiKeyMiddleware)
+
+
 if __name__ == "__main__":
-    if _should_run_sse:
+    if IS_WEB_TRANSPORT:
         import uvicorn
-        port = int(os.environ.get("PORT", 8000))
-        if not ANY_TIER_KEY_CONFIGURED:
-            print("Warning: no MCP_API_KEY_TIER1/2/3 set. This SSE endpoint will be publicly queryable at full clearance by anyone with the URL.", file=sys.stderr)
-        print(f"Starting MCP SSE Server on port {port}...", file=sys.stderr)
-        uvicorn.run("server:app", host="0.0.0.0", port=port, log_level="info")
+        uvicorn.run("server:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8000)), log_level="info")
     else:
-        # Default: Run stdio mode (directly managed by Claude Desktop)
         try:
             mcp.run(transport="stdio")
         except TypeError:
