@@ -22,7 +22,7 @@ last_assessment_date: "2026-06-29"
 **Curation Score:** 20/100
 **Priority Tier:** 3
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Least concern (LC)
 - **Poaching Risk Score:** 2/10
 - **Protected Breeding Zone:** Spain range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-06-29"
 ### Conservation Measures & Protocols
 Population trend: Stable. Primary diet: Unknown. Typical lifestyle: Terrestrial,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Eurasian_Forest_Migration_Network]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-07-12 16:24 UTC | 64.7081, -1.5803 | `FIELD-CAM-130` | 0.5°C | 41.30% | N/A | Simulated field observation within Europe range (no real telemetry source for this dataset). |

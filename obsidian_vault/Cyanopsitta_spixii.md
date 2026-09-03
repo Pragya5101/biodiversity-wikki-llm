@@ -22,7 +22,7 @@ last_assessment_date: "2026-05-18"
 **Curation Score:** 95/100
 **Priority Tier:** 1
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Extinct in the wild (EW)
 - **Poaching Risk Score:** 8/10
 - **Protected Breeding Zone:** Brazil range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-05-18"
 ### Conservation Measures & Protocols
 Population trend: Unknown. Primary diet: Frugivore,,Granivore,,Herbivore. Typical lifestyle: Arboreal, Zoochory, Terrestrial, Nomadic, Oviparous.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Amazon-Guiana_Ecological_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-05 23:24 UTC | -17.0740, -67.9587 | `FIELD-CAM-723` | 31.9°C | 27.40% | N/A | Simulated field observation within South America range (no real telemetry source for this dataset). |

@@ -22,7 +22,7 @@ last_assessment_date: "2026-06-03"
 **Curation Score:** 85/100
 **Priority Tier:** 1
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Critically endangered (CR)
 - **Poaching Risk Score:** 9/10
 - **Protected Breeding Zone:** Mexico range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-06-03"
 ### Conservation Measures & Protocols
 Population trend: Unknown. Primary diet: Omnivore. Typical lifestyle: Natatorial, Terrestrial, Congregatory,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-07-22 15:24 UTC | 36.8784, -74.9093 | `FIELD-CAM-952` | 28.2°C | 39.90% | N/A | Simulated field observation within North America range (no real telemetry source for this dataset). |

@@ -22,7 +22,7 @@ last_assessment_date: "2026-04-04"
 **Curation Score:** 55/100
 **Priority Tier:** 2
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Vulnerable (VU)
 - **Poaching Risk Score:** 5/10
 - **Protected Breeding Zone:** Belgium range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-04-04"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Unknown. Typical lifestyle: Terrestrial, Congregatory,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-29 08:24 UTC | 15.6574, -128.0463 | `FIELD-CAM-630` | 5.4°C | 18.60% | N/A | Simulated field observation within North America range (no real telemetry source for this dataset). |

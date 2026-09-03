@@ -22,7 +22,7 @@ last_assessment_date: "2026-03-28"
 **Curation Score:** 85/100
 **Priority Tier:** 1
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Critically endangered (CR)
 - **Poaching Risk Score:** 9/10
 - **Protected Breeding Zone:** Angola range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-03-28"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Carnivore,,Scavenger. Typical lifestyle: Terrestrial, Soaring birds, Altricial,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Serengeti_Migration_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-28 14:24 UTC | 5.1436, 24.5644 | `FIELD-CAM-679` | 21.3°C | 56.60% | N/A | Simulated field observation within Africa range (no real telemetry source for this dataset). |

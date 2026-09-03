@@ -22,7 +22,7 @@ last_assessment_date: "2026-06-23"
 **Curation Score:** 65/100
 **Priority Tier:** 2
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Endangered (EN)
 - **Poaching Risk Score:** 7/10
 - **Protected Breeding Zone:** Madagascar range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-06-23"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Unknown. Typical lifestyle: Unknown.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Serengeti_Migration_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-30 10:24 UTC | 17.0684, 39.5597 | `FIELD-CAM-572` | -7.0°C | 35.90% | N/A | Simulated field observation within Africa range (no real telemetry source for this dataset). |

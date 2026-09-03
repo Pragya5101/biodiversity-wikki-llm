@@ -22,7 +22,7 @@ last_assessment_date: "2025-11-24"
 **Curation Score:** 85/100
 **Priority Tier:** 1
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Critically endangered (CR)
 - **Poaching Risk Score:** 9/10
 - **Protected Breeding Zone:** Range not specified
@@ -32,14 +32,14 @@ last_assessment_date: "2025-11-24"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Carnivore,,Insectivores,,Piscivores. Typical lifestyle: Island endemic, Natatorial, Terrestrial,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 *No migration or buffer corridors linked to this species.*
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-07-31 19:24 UTC | -8.8771, 21.0955 | `FIELD-CAM-374` | 2.4°C | 39.50% | N/A | Simulated field observation within unspecified range (no real telemetry source for this dataset). |

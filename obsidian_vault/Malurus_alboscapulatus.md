@@ -22,7 +22,7 @@ last_assessment_date: "2026-01-11"
 **Curation Score:** 20/100
 **Priority Tier:** 3
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Least concern (LC)
 - **Poaching Risk Score:** 2/10
 - **Protected Breeding Zone:** Range not specified
@@ -32,14 +32,14 @@ last_assessment_date: "2026-01-11"
 ### Conservation Measures & Protocols
 Population trend: Stable. Primary diet: Unknown. Typical lifestyle: Unknown.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 *No migration or buffer corridors linked to this species.*
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-31 11:24 UTC | 17.1896, 12.0042 | `FIELD-CAM-937` | 30.4°C | 45.10% | N/A | Simulated field observation within unspecified range (no real telemetry source for this dataset). |

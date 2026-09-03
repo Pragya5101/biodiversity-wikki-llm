@@ -22,7 +22,7 @@ last_assessment_date: "2026-03-21"
 **Curation Score:** 85/100
 **Priority Tier:** 1
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Critically endangered (CR)
 - **Poaching Risk Score:** 9/10
 - **Protected Breeding Zone:** Australia range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-03-21"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Unknown. Typical lifestyle: Unknown.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 *No migration or buffer corridors linked to this species.*
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-12 17:24 UTC | 16.1373, 38.2607 | `FIELD-CAM-485` | 5.1°C | 28.50% | N/A | Simulated field observation within unspecified range (no real telemetry source for this dataset). |

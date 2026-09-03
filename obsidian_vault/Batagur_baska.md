@@ -22,7 +22,7 @@ last_assessment_date: "2025-09-07"
 **Curation Score:** 85/100
 **Priority Tier:** 1
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Critically endangered (CR)
 - **Poaching Risk Score:** 9/10
 - **Protected Breeding Zone:** Bangladesh range
@@ -32,7 +32,7 @@ last_assessment_date: "2025-09-07"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Omnivore. Typical lifestyle: Aquatic, Terrestrial,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 - **Predation** relationship with [[Gavialis_gangeticus]] (Gharial)
   - *Energy Pathway:* Diet-inferred trophic link
@@ -50,7 +50,7 @@ Population trend: Decreasing. Primary diet: Omnivore. Typical lifestyle: Aquatic
 ### Connected Corridors
 - [[Eurasian_Forest_Migration_Network]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-07-05 13:24 UTC | 17.1916, 102.0008 | `FIELD-CAM-392` | -5.2°C | 88.60% | N/A | Simulated field observation within Asia range (no real telemetry source for this dataset). |

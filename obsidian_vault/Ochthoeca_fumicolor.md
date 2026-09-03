@@ -22,7 +22,7 @@ last_assessment_date: "2026-06-29"
 **Curation Score:** 20/100
 **Priority Tier:** 3
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Least concern (LC)
 - **Poaching Risk Score:** 2/10
 - **Protected Breeding Zone:** Ecuador range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-06-29"
 ### Conservation Measures & Protocols
 Population trend: Stable. Primary diet: Unknown. Typical lifestyle: Terrestrial,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Amazon-Guiana_Ecological_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-23 10:24 UTC | 2.9555, -70.9541 | `FIELD-CAM-655` | 37.0°C | 50.90% | N/A | Simulated field observation within South America range (no real telemetry source for this dataset). |

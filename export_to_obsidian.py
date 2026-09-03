@@ -262,7 +262,7 @@ def export_vault():
             f.write(f"**Priority Tier:** {species['priority_tier']}\n\n")
 
             # Tier 3 - Conservation Intelligence
-            f.write("## 🛡️ Tier 3: Conservation Intelligence\n")
+            f.write("## 🛡️ Conservation Intelligence\n")
             if species['iucn_status']:
                 f.write(f"- **IUCN Status:** {species['iucn_status']}\n")
                 f.write(f"- **Poaching Risk Score:** {species['poaching_risk_score']}/10\n")
@@ -277,7 +277,7 @@ def export_vault():
             f.write("\n")
 
             # Tier 2 - Relational Network & Ecological Interactions
-            f.write("## 🕸️ Tier 2: Relational Network & Ecological Interactions\n")
+            f.write("## 🕸️ Relational Network & Ecological Interactions\n")
             
             # Sub-section: Interactions
             f.write("### Species Interactions\n")
@@ -304,7 +304,7 @@ def export_vault():
             f.write("\n")
 
             # Tier 1 - Raw Observation & Telemetry
-            f.write("## 📡 Tier 1: Raw Observation & Telemetry Data\n")
+            f.write("## 📡 Raw Observation & Telemetry Data\n")
             s_sightings = sightings_by_species.get(s_id, [])
             if s_sightings:
                 f.write("| Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |\n")

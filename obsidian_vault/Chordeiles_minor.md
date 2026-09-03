@@ -22,7 +22,7 @@ last_assessment_date: "2025-11-22"
 **Curation Score:** 20/100
 **Priority Tier:** 3
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Least concern (LC)
 - **Poaching Risk Score:** 2/10
 - **Protected Breeding Zone:** Antigua and Barbuda range
@@ -32,14 +32,14 @@ last_assessment_date: "2025-11-22"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Carnivore,,Insectivores. Typical lifestyle: Terrestrial, Precocial, Territorial,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Yukon-Rocky_Mountain_Wilderness_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-24 14:24 UTC | 16.6077, -124.0447 | `FIELD-CAM-238` | 34.5°C | 72.10% | N/A | Simulated field observation within North America range (no real telemetry source for this dataset). |

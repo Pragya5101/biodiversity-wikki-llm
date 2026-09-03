@@ -22,7 +22,7 @@ last_assessment_date: "2026-06-09"
 **Curation Score:** 85/100
 **Priority Tier:** 1
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Critically endangered (CR)
 - **Poaching Risk Score:** 9/10
 - **Protected Breeding Zone:** India range
@@ -32,7 +32,7 @@ last_assessment_date: "2026-06-09"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Carnivore,,Piscivores. Typical lifestyle: Aquatic, Apex predator, Precocial, Natatorial, Territorial, Congregatory, Oviparous, Burrowing.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 - **Predation** relationship with [[Batagur_baska]] (Northern River Terrapin)
   - *Energy Pathway:* Diet-inferred trophic link
@@ -41,7 +41,7 @@ Population trend: Decreasing. Primary diet: Carnivore,,Piscivores. Typical lifes
 ### Connected Corridors
 - [[Eurasian_Forest_Migration_Network]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-20 01:24 UTC | 18.9115, 131.9015 | `FIELD-CAM-680` | 19.7°C | 97.00% | N/A | Simulated field observation within Asia range (no real telemetry source for this dataset). |

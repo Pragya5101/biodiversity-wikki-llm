@@ -22,7 +22,7 @@ last_assessment_date: "2026-04-05"
 **Curation Score:** 95/100
 **Priority Tier:** 1
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Extinct in the wild (EW)
 - **Poaching Risk Score:** 8/10
 - **Protected Breeding Zone:** China range
@@ -32,14 +32,14 @@ last_assessment_date: "2026-04-05"
 ### Conservation Measures & Protocols
 Population trend: Unknown. Primary diet: Herbivore,,Folivore. Typical lifestyle: Terrestrial, Cursorial, Grazing, Semiaquatic, Nomadic,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Eurasian_Forest_Migration_Network]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-11 13:24 UTC | 27.3866, 111.4772 | `FIELD-CAM-609` | 38.4°C | 90.40% | N/A | Simulated field observation within Asia range (no real telemetry source for this dataset). |

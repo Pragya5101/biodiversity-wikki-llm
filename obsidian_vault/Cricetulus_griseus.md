@@ -22,7 +22,7 @@ last_assessment_date: "2026-06-24"
 **Curation Score:** 15/100
 **Priority Tier:** 3
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Not evaluated (NE)
 - **Poaching Risk Score:** 2/10
 - **Protected Breeding Zone:** China range
@@ -32,7 +32,7 @@ last_assessment_date: "2026-06-24"
 ### Conservation Measures & Protocols
 Population trend: Unknown. Primary diet: Omnivore. Typical lifestyle: Terrestrial, Altricial, Burrowing, Fossorial, Cursorial, Browsing.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 - **Predation** relationship with [[Tarsius_pumilus]] (Pygmy Tarsier)
   - *Energy Pathway:* Diet-inferred trophic link
@@ -44,7 +44,7 @@ Population trend: Unknown. Primary diet: Omnivore. Typical lifestyle: Terrestria
 ### Connected Corridors
 - [[Eurasian_Forest_Migration_Network]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-07-20 00:24 UTC | 53.8354, 120.6680 | `FIELD-CAM-144` | 26.6°C | 81.10% | N/A | Simulated field observation within Asia range (no real telemetry source for this dataset). |

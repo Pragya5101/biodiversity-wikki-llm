@@ -22,7 +22,7 @@ last_assessment_date: "2026-06-12"
 **Curation Score:** 55/100
 **Priority Tier:** 2
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Vulnerable (VU)
 - **Poaching Risk Score:** 5/10
 - **Protected Breeding Zone:** Kenya range
@@ -32,7 +32,7 @@ last_assessment_date: "2026-06-12"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Herbivore. Typical lifestyle: Terrestrial, Precocial, Grazing,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 - **Predation** relationship with [[Bitis_arietans]] (Puff Adder)
   - *Energy Pathway:* Diet-inferred trophic link
@@ -41,7 +41,7 @@ Population trend: Decreasing. Primary diet: Herbivore. Typical lifestyle: Terres
 ### Connected Corridors
 - [[Serengeti_Migration_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-07-20 14:24 UTC | -9.6489, 37.4008 | `FIELD-CAM-335` | -6.8°C | 19.10% | N/A | Simulated field observation within Africa range (no real telemetry source for this dataset). |

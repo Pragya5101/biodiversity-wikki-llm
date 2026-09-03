@@ -22,7 +22,7 @@ last_assessment_date: "2026-05-23"
 **Curation Score:** 65/100
 **Priority Tier:** 2
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Endangered (EN)
 - **Poaching Risk Score:** 7/10
 - **Protected Breeding Zone:** Indonesia range
@@ -32,7 +32,7 @@ last_assessment_date: "2026-05-23"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Insectivores,,Carnivore. Typical lifestyle: Arboreal, Precocial, Island endemic, Scansorial, Territorial, Viviparous, Jumping.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 - **Predation** relationship with [[Cricetulus_griseus]] (Chinese Hamster)
   - *Energy Pathway:* Diet-inferred trophic link
@@ -41,7 +41,7 @@ Population trend: Decreasing. Primary diet: Insectivores,,Carnivore. Typical lif
 ### Connected Corridors
 - [[Eurasian_Forest_Migration_Network]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-08-08 20:24 UTC | 8.3569, 74.5471 | `FIELD-CAM-441` | 28.0°C | 26.50% | N/A | Simulated field observation within Asia range (no real telemetry source for this dataset). |

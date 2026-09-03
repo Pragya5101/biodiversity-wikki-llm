@@ -22,7 +22,7 @@ last_assessment_date: "2025-09-14"
 **Curation Score:** 55/100
 **Priority Tier:** 2
 
-## 🛡️ Tier 3: Conservation Intelligence
+## 🛡️ Conservation Intelligence
 - **IUCN Status:** Vulnerable (VU)
 - **Poaching Risk Score:** 5/10
 - **Protected Breeding Zone:** Algeria range
@@ -32,14 +32,14 @@ last_assessment_date: "2025-09-14"
 ### Conservation Measures & Protocols
 Population trend: Decreasing. Primary diet: Herbivore,,Folivore,,Frugivore,,Granivore,,Lignivore. Typical lifestyle: Terrestrial, Cursorial, Precocial, Grazing, Browsing, Zoochory, Nomadic, Territorial,.
 
-## 🕸️ Tier 2: Relational Network & Ecological Interactions
+## 🕸️ Relational Network & Ecological Interactions
 ### Species Interactions
 *No interactions documented.*
 
 ### Connected Corridors
 - [[Serengeti_Migration_Corridor]]
 
-## 📡 Tier 1: Raw Observation & Telemetry Data
+## 📡 Raw Observation & Telemetry Data
 | Date/Time | Location (Lat, Long) | Sensor ID | Temp (°C) | Battery | Image Reference | Observations / Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-07-11 15:24 UTC | 2.1056, 22.9398 | `FIELD-CAM-125` | 30.1°C | 50.40% | N/A | Simulated field observation within Africa range (no real telemetry source for this dataset). |
