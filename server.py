@@ -747,6 +747,67 @@ def list_recent_global_sightings(limit: int = 20) -> str:
         return f"Database error: {error}"
 
 
+# --- Per-status tools, registered per deployment -----------------------------
+# Unlike the generic tools above (which take a status/tier as an argument and
+# filter at query time), these are single-status tools that only get
+# registered on a deployment at all if that status's tier is inside its
+# ALLOWED_TIERS. tier3only's server therefore never even offers a
+# "list_critically_endangered_species" tool -- not just an empty result for
+# one -- since Tier 1 is invisible to that endpoint. Each real IUCN status in
+# the dataset belongs to exactly one priority tier (see STATUS_TIER in
+# ingest_animals_data.py), so this partitions cleanly.
+STATUS_TOOL_DEFS = [
+    ("Extinct in the wild (EW)", 1, "list_extinct_in_the_wild_species", "Extinct in the Wild"),
+    ("Extinct (EX)", 1, "list_extinct_status_species", "Extinct"),
+    ("Critically endangered (CR)", 1, "list_critically_endangered_species", "Critically Endangered"),
+    ("Endangered (EN)", 2, "list_endangered_species", "Endangered"),
+    ("Vulnerable (VU)", 2, "list_vulnerable_species", "Vulnerable"),
+    ("Near Threatened (NT)", 2, "list_near_threatened_species", "Near Threatened"),
+    ("Data deficient (DD)", 3, "list_data_deficient_species", "Data Deficient"),
+    ("Least concern (LC)", 3, "list_least_concern_species", "Least Concern"),
+    ("Not evaluated (NE)", 3, "list_not_evaluated_species", "Not Evaluated"),
+]
+
+
+def _make_status_lister(status_label: str, human_label: str):
+    def _list_status_species(limit: int = 20) -> str:
+        if err := _validate_limit(limit):
+            return err
+        try:
+            scope_sql, scope_params = scope_clause("s.priority_tier")
+            with get_db_cursor() as cursor:
+                cursor.execute(
+                    f"""SELECT s.common_name, s.scientific_name, s.priority_tier
+                        FROM species s JOIN conservation_intelligence ci ON ci.species_id = s.id
+                        WHERE ci.iucn_status = %s AND {scope_sql}
+                        ORDER BY s.common_name LIMIT %s""",
+                    (status_label, *scope_params, limit),
+                )
+                rows = cursor.fetchall()
+            if not rows:
+                return f"No {human_label} species are available through this endpoint."
+            output = [f"### {human_label} species ({MCP_SCOPE})", "| Species | Priority tier |", "| --- | --- |"]
+            output.extend(f"| {row['common_name']} (*{row['scientific_name']}*) | {row['priority_tier']} |" for row in rows)
+            return "\n".join(output)
+        except Exception as error:
+            return f"Database error: {error}"
+    return _list_status_species
+
+
+for _status_label, _required_tier, _tool_name, _human_label in STATUS_TOOL_DEFS:
+    if _required_tier in ALLOWED_TIERS:
+        _fn = _make_status_lister(_status_label, _human_label)
+        _fn.__name__ = _tool_name
+        mcp.tool(
+            name=_tool_name,
+            description=(
+                f'List every species in this endpoint\'s scope with the exact IUCN status "{_human_label}". '
+                f'Use this for a direct question like "give me the {_human_label.lower()} animals", as opposed to '
+                f"the broader list_at_risk_species/list_extinct_species or the general-purpose list_species_by_iucn_status."
+            ),
+        )(_fn)
+
+
 async def healthcheck(request):
     from starlette.responses import JSONResponse
     return JSONResponse({"status": "ok", "scope": MCP_SCOPE, "allowed_tiers": ALLOWED_TIERS})
