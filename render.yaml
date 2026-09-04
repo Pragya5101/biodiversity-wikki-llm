@@ -41,6 +41,9 @@ services:
       - key: MCP_API_KEY
         generateValue: true
 
+  # OAuth pilot: this is the only one of the three using real per-user login
+  # (see oauth_provider.py) instead of a shared MCP_API_KEY. -all and -tier23
+  # are unaffected.
   - type: web
     name: biodiversity-mcp-tier3
     runtime: python
@@ -55,5 +58,7 @@ services:
           property: connectionString
       - key: MCP_SCOPE
         value: tier3only
-      - key: MCP_API_KEY
-        generateValue: true
+      - key: AUTH_MODE
+        value: oauth
+      - key: PUBLIC_BASE_URL
+        value: https://biodiversity-mcp-tier3.onrender.com

@@ -17,7 +17,6 @@ from mcp.server.fastmcp import FastMCP
 
 
 load_dotenv()
-mcp = FastMCP("Wildlife Biodiversity Priority Wiki")
 
 SCOPES = {
     "all": (1, 2, 3),
@@ -29,6 +28,14 @@ if MCP_SCOPE not in SCOPES:
     raise RuntimeError("MCP_SCOPE must be one of: all, tier2plus, tier3only.")
 ALLOWED_TIERS = SCOPES[MCP_SCOPE]
 MCP_API_KEY = os.environ.get("MCP_API_KEY")
+
+# AUTH_MODE is a per-deployment pilot switch. "apikey" (default) is the
+# original shared-secret x-api-key/api_key check, unchanged, used by
+# biodiversity-mcp-all and biodiversity-mcp-tier23. "oauth" -- currently only
+# set on biodiversity-mcp-tier3 -- replaces it with a real per-user OAuth 2.1
+# login (see oauth_provider.py) so access isn't one shared secret string.
+AUTH_MODE = os.environ.get("AUTH_MODE", "apikey").lower()
+PUBLIC_BASE_URL = os.environ.get("PUBLIC_BASE_URL")
 
 IS_WEB_TRANSPORT = (
     "--sse" in sys.argv
@@ -71,6 +78,32 @@ def get_db_cursor():
         raise
     finally:
         db_pool.putconn(connection)
+
+
+oauth_provider = None
+if AUTH_MODE == "oauth":
+    if not PUBLIC_BASE_URL:
+        raise RuntimeError("PUBLIC_BASE_URL must be set when AUTH_MODE=oauth (e.g. https://biodiversity-mcp-tier3.onrender.com).")
+    from oauth_provider import WikiOAuthProvider
+    from mcp.server.auth.settings import AuthSettings, ClientRegistrationOptions, RevocationOptions
+
+    oauth_provider = WikiOAuthProvider(get_db_cursor)
+    mcp = FastMCP(
+        "Wildlife Biodiversity Priority Wiki",
+        auth_server_provider=oauth_provider,
+        auth=AuthSettings(
+            issuer_url=PUBLIC_BASE_URL,
+            resource_server_url=PUBLIC_BASE_URL,
+            client_registration_options=ClientRegistrationOptions(
+                enabled=True, valid_scopes=["mcp"], default_scopes=["mcp"]
+            ),
+            revocation_options=RevocationOptions(enabled=True),
+        ),
+    )
+elif AUTH_MODE != "apikey":
+    raise RuntimeError("AUTH_MODE must be one of: apikey, oauth.")
+else:
+    mcp = FastMCP("Wildlife Biodiversity Priority Wiki")
 
 
 def scope_clause(column: str = "priority_tier") -> tuple[str, tuple[int, ...]]:
@@ -823,7 +856,46 @@ app = mcp.streamable_http_app()
 from starlette.routing import Route
 app.routes.append(Route("/healthz", healthcheck))
 
-if IS_WEB_TRANSPORT:
+if AUTH_MODE == "oauth":
+    from starlette.responses import HTMLResponse, RedirectResponse
+
+    def _login_page(login_id: str, error: bool = False) -> str:
+        error_html = "<p style='color:#b00020'>Invalid username or password.</p>" if error else ""
+        return f"""<!doctype html><html><body style="font-family: system-ui; max-width: 360px; margin: 80px auto;">
+<h2>Biodiversity Wiki -- Sign in</h2>
+{error_html}
+<form method="post" action="/login">
+  <input type="hidden" name="login_id" value="{login_id}">
+  <div style="margin-bottom: 10px;"><label>Username<br><input name="username" autofocus style="width: 100%; padding: 6px;"></label></div>
+  <div style="margin-bottom: 10px;"><label>Password<br><input name="password" type="password" style="width: 100%; padding: 6px;"></label></div>
+  <button type="submit" style="padding: 8px 16px;">Sign in</button>
+</form>
+</body></html>"""
+
+    async def login_form(request):
+        login_id = request.query_params.get("login_id", "")
+        error = request.query_params.get("error") == "1"
+        if not login_id:
+            return HTMLResponse("Missing login_id. Please reconnect the connector.", status_code=400)
+        return HTMLResponse(_login_page(login_id, error=error))
+
+    async def login_submit(request):
+        form = await request.form()
+        login_id = form.get("login_id", "")
+        username = form.get("username", "")
+        password = form.get("password", "")
+        if not oauth_provider.verify_user(username, password):
+            return RedirectResponse(f"/login?login_id={login_id}&error=1", status_code=302)
+        try:
+            redirect_url = await oauth_provider.complete_login(login_id, username.strip())
+        except ValueError as error:
+            return HTMLResponse(str(error), status_code=400)
+        return RedirectResponse(redirect_url, status_code=302)
+
+    app.routes.append(Route("/login", login_form, methods=["GET"]))
+    app.routes.append(Route("/login", login_submit, methods=["POST"]))
+
+elif IS_WEB_TRANSPORT:
     from starlette.middleware.base import BaseHTTPMiddleware
     from starlette.responses import JSONResponse
 

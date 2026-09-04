@@ -95,6 +95,17 @@ Replace `MCP1`/`MCP2`/`MCP3` with each service's own generated `MCP_API_KEY` val
 
 Add only the connectors appropriate for the person using Claude. Do not share the all-data key with a Tier-3-only user.
 
+## OAuth pilot (biodiversity-mcp-tier3 only)
+
+`biodiversity-mcp-tier3` uses real per-user login instead of a shared `MCP_API_KEY` -- `biodiversity-mcp-all` and `biodiversity-mcp-tier23` are unaffected and keep using the API-key setup above. This is controlled by two env vars only set on the tier3 service: `AUTH_MODE=oauth` and `PUBLIC_BASE_URL` (its own `https://...onrender.com` URL). See `oauth_provider.py` for the implementation -- a minimal OAuth 2.1 authorization server (Dynamic Client Registration, PKCE, a first-party `/login` form) built on the MCP SDK's `OAuthAuthorizationServerProvider` interface, backed by Postgres.
+
+Setup, after deploying:
+
+1. Add the new OAuth tables without touching existing species data: `DATABASE_URL="..." python apply_schema.py`.
+2. Create a login account for each person who should have Tier-3 access: `DATABASE_URL="..." python create_oauth_user.py --username alice --password "..."`.
+3. In Claude's "Add custom connector" dialog, use `https://biodiversity-mcp-tier3.onrender.com/mcp` as the URL, and leave Authentication on its default "Detected" setting (or pick OAuth explicitly) rather than the "None" + header override used for the other two connectors. Claude will register itself automatically (Dynamic Client Registration) and redirect to this server's own login page.
+4. There is no self-service signup; only accounts you create with `create_oauth_user.py` can log in.
+
 ## Verification
 
 ```powershell

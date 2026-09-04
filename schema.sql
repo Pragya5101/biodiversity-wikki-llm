@@ -108,3 +108,69 @@ CREATE TABLE IF NOT EXISTS private_notes (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_private_notes_species_id ON private_notes(species_id);
+
+-- OAuth pilot (currently only used by the biodiversity-mcp-tier3 deployment,
+-- when AUTH_MODE=oauth; the other two deployments keep using MCP_API_KEY and
+-- never touch these tables). See oauth_provider.py.
+
+-- Human accounts allowed to log in and obtain a token for this deployment.
+CREATE TABLE IF NOT EXISTS oauth_users (
+    username VARCHAR(100) PRIMARY KEY,
+    password_hash VARCHAR(200) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- MCP clients (e.g. Claude) registered via Dynamic Client Registration.
+CREATE TABLE IF NOT EXISTS oauth_clients (
+    client_id VARCHAR(64) PRIMARY KEY,
+    client_secret VARCHAR(128),
+    redirect_uris TEXT NOT NULL,
+    grant_types TEXT NOT NULL,
+    token_endpoint_auth_method VARCHAR(30),
+    client_name VARCHAR(200),
+    scope TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Short-lived state held between the /authorize redirect and our own /login
+-- form being submitted.
+CREATE TABLE IF NOT EXISTS oauth_pending_authorizations (
+    login_id VARCHAR(64) PRIMARY KEY,
+    client_id VARCHAR(64) NOT NULL,
+    redirect_uri TEXT NOT NULL,
+    redirect_uri_provided_explicitly BOOLEAN NOT NULL,
+    scopes TEXT,
+    state TEXT,
+    code_challenge VARCHAR(200) NOT NULL,
+    resource TEXT,
+    expires_at DOUBLE PRECISION NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS oauth_authorization_codes (
+    code VARCHAR(64) PRIMARY KEY,
+    client_id VARCHAR(64) NOT NULL,
+    redirect_uri TEXT NOT NULL,
+    redirect_uri_provided_explicitly BOOLEAN NOT NULL,
+    scopes TEXT,
+    code_challenge VARCHAR(200) NOT NULL,
+    resource TEXT,
+    subject VARCHAR(100),
+    expires_at DOUBLE PRECISION NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS oauth_access_tokens (
+    token VARCHAR(128) PRIMARY KEY,
+    client_id VARCHAR(64) NOT NULL,
+    scopes TEXT,
+    resource TEXT,
+    subject VARCHAR(100),
+    expires_at BIGINT
+);
+
+CREATE TABLE IF NOT EXISTS oauth_refresh_tokens (
+    token VARCHAR(128) PRIMARY KEY,
+    client_id VARCHAR(64) NOT NULL,
+    scopes TEXT,
+    subject VARCHAR(100),
+    expires_at BIGINT
+);
