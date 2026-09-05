@@ -99,12 +99,13 @@ Add only the connectors appropriate for the person using Claude. Do not share th
 
 `biodiversity-mcp-tier3` uses real per-user login instead of a shared `MCP_API_KEY` -- `biodiversity-mcp-all` and `biodiversity-mcp-tier23` are unaffected and keep using the API-key setup above. This is controlled by two env vars only set on the tier3 service: `AUTH_MODE=oauth` and `PUBLIC_BASE_URL` (its own `https://...onrender.com` URL). See `oauth_provider.py` for the implementation -- a minimal OAuth 2.1 authorization server (Dynamic Client Registration, PKCE, a first-party `/login` form) built on the MCP SDK's `OAuthAuthorizationServerProvider` interface, backed by Postgres.
 
-Setup, after deploying:
+Setup, after deploying: add the new OAuth tables without touching existing species data: `DATABASE_URL="..." python apply_schema.py`. That's the only one-time step against the database -- accounts themselves are self-service (see below).
 
-1. Add the new OAuth tables without touching existing species data: `DATABASE_URL="..." python apply_schema.py`.
-2. Create a login account for each person who should have Tier-3 access: `DATABASE_URL="..." python create_oauth_user.py --username alice --password "..."`.
-3. In Claude's "Add custom connector" dialog, use `https://biodiversity-mcp-tier3.onrender.com/mcp` as the URL, and leave Authentication on its default "Detected" setting (or pick OAuth explicitly) rather than the "None" + header override used for the other two connectors. Claude will register itself automatically (Dynamic Client Registration) and redirect to this server's own login page.
-4. There is no self-service signup; only accounts you create with `create_oauth_user.py` can log in.
+In Claude's "Add custom connector" dialog, use `https://biodiversity-mcp-tier3.onrender.com/mcp` as the URL, and leave Authentication on its default "Detected" setting (or pick OAuth explicitly) rather than the "None" + header override used for the other two connectors. Claude will register itself automatically (Dynamic Client Registration) and redirect to this server's own login page.
+
+**Whoever you share this URL with creates their own account.** The `/login` page has a "Create an account" link to `/signup`, where anyone can pick their own username and password (8+ characters) and is signed in immediately -- no DB or terminal access required, and nobody needs you to run a command on their behalf. `create_oauth_user.py` still exists as an admin-side fallback (e.g. to reset someone's password from the terminal), but it is no longer the primary way accounts get created.
+
+Anyone with the connector URL can create an account this way, so treat sharing the URL itself as the actual access-control decision for this tier -- the same way you'd think about who gets the `-tier23` or `-all` API keys.
 
 ## Verification
 

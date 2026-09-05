@@ -70,6 +70,22 @@ class WikiOAuthProvider(OAuthAuthorizationServerProvider):
             row = cursor.fetchone()
         return bool(row) and verify_password(password, row["password_hash"])
 
+    def create_user(self, username: str, password: str) -> bool:
+        """Self-service account creation, used by the /signup route.
+
+        Returns False (without raising) if the username is already taken, so
+        the caller can show a friendly "pick another username" message.
+        """
+        with self._get_db_cursor() as cursor:
+            cursor.execute("SELECT 1 FROM oauth_users WHERE username = %s", (username,))
+            if cursor.fetchone():
+                return False
+            cursor.execute(
+                "INSERT INTO oauth_users (username, password_hash) VALUES (%s, %s)",
+                (username, hash_password(password)),
+            )
+        return True
+
     async def complete_login(self, login_id: str, username: str) -> str:
         with self._get_db_cursor() as cursor:
             cursor.execute("SELECT * FROM oauth_pending_authorizations WHERE login_id = %s", (login_id,))

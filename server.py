@@ -857,19 +857,39 @@ from starlette.routing import Route
 app.routes.append(Route("/healthz", healthcheck))
 
 if AUTH_MODE == "oauth":
+    import html as html_lib
+
     from starlette.responses import HTMLResponse, RedirectResponse
 
     def _login_page(login_id: str, error: bool = False) -> str:
         error_html = "<p style='color:#b00020'>Invalid username or password.</p>" if error else ""
+        safe_login_id = html_lib.escape(login_id)
         return f"""<!doctype html><html><body style="font-family: system-ui; max-width: 360px; margin: 80px auto;">
 <h2>Biodiversity Wiki -- Sign in</h2>
 {error_html}
 <form method="post" action="/login">
-  <input type="hidden" name="login_id" value="{login_id}">
+  <input type="hidden" name="login_id" value="{safe_login_id}">
   <div style="margin-bottom: 10px;"><label>Username<br><input name="username" autofocus style="width: 100%; padding: 6px;"></label></div>
   <div style="margin-bottom: 10px;"><label>Password<br><input name="password" type="password" style="width: 100%; padding: 6px;"></label></div>
   <button type="submit" style="padding: 8px 16px;">Sign in</button>
 </form>
+<p>New here? <a href="/signup?login_id={safe_login_id}">Create an account</a></p>
+</body></html>"""
+
+    def _signup_page(login_id: str, error: str | None = None) -> str:
+        error_html = f"<p style='color:#b00020'>{html_lib.escape(error)}</p>" if error else ""
+        safe_login_id = html_lib.escape(login_id)
+        return f"""<!doctype html><html><body style="font-family: system-ui; max-width: 360px; margin: 80px auto;">
+<h2>Biodiversity Wiki -- Create an account</h2>
+{error_html}
+<form method="post" action="/signup">
+  <input type="hidden" name="login_id" value="{safe_login_id}">
+  <div style="margin-bottom: 10px;"><label>Choose a username<br><input name="username" autofocus style="width: 100%; padding: 6px;"></label></div>
+  <div style="margin-bottom: 10px;"><label>Choose a password (8+ characters)<br><input name="password" type="password" style="width: 100%; padding: 6px;"></label></div>
+  <div style="margin-bottom: 10px;"><label>Confirm password<br><input name="confirm_password" type="password" style="width: 100%; padding: 6px;"></label></div>
+  <button type="submit" style="padding: 8px 16px;">Create account and sign in</button>
+</form>
+<p>Already have an account? <a href="/login?login_id={safe_login_id}">Sign in</a></p>
 </body></html>"""
 
     async def login_form(request):
@@ -892,8 +912,46 @@ if AUTH_MODE == "oauth":
             return HTMLResponse(str(error), status_code=400)
         return RedirectResponse(redirect_url, status_code=302)
 
+    async def signup_form(request):
+        login_id = request.query_params.get("login_id", "")
+        if not login_id:
+            return HTMLResponse("Missing login_id. Please reconnect the connector.", status_code=400)
+        return HTMLResponse(_signup_page(login_id))
+
+    async def signup_submit(request):
+        form = await request.form()
+        login_id = form.get("login_id", "")
+        username = form.get("username", "").strip()
+        password = form.get("password", "")
+        confirm_password = form.get("confirm_password", "")
+
+        def error(message: str):
+            return HTMLResponse(_signup_page(login_id, error=message), status_code=400)
+
+        if not username or len(username) > 100:
+            return error("Please choose a username (up to 100 characters).")
+        if len(password) < 8:
+            return error("Password must be at least 8 characters.")
+        if password != confirm_password:
+            return error("Passwords do not match.")
+
+        try:
+            created = oauth_provider.create_user(username, password)
+        except Exception as db_error:
+            return error(f"Could not create account: {db_error}")
+        if not created:
+            return error(f"Username '{username}' is already taken. Choose another, or sign in instead.")
+
+        try:
+            redirect_url = await oauth_provider.complete_login(login_id, username)
+        except ValueError as login_error:
+            return HTMLResponse(str(login_error), status_code=400)
+        return RedirectResponse(redirect_url, status_code=302)
+
     app.routes.append(Route("/login", login_form, methods=["GET"]))
     app.routes.append(Route("/login", login_submit, methods=["POST"]))
+    app.routes.append(Route("/signup", signup_form, methods=["GET"]))
+    app.routes.append(Route("/signup", signup_submit, methods=["POST"]))
 
 elif IS_WEB_TRANSPORT:
     from starlette.middleware.base import BaseHTTPMiddleware
